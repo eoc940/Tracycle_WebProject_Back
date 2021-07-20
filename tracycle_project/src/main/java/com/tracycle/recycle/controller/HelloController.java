@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 public class HelloController {
 	
 	// TEST 중입니다!!!! 
+	// 수고하셨어요
 	
 	@GetMapping("/hello")
 	public String hello(HttpServletRequest req) {
