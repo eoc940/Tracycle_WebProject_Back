@@ -3,7 +3,7 @@ package com.tracycle.recycle.service;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import com.tracycle.recycle.model.UserVO;
+import com.tracycle.recycle.domain.UserVO;
 import com.tracycle.recycle.repository.UserDao;
 
 @Service

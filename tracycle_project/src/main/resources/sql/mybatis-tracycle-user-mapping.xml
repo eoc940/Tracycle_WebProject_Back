@@ -24,15 +24,16 @@
 		(user_id, password, nickname, address)
 		VALUES
 		(#{userId},#{password},#{nickName},#{address})
+
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="hashMap" resultMap="selectRM">
+	<select id="login" parameterType="userVO" resultMap="selectRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{userId}
 		<if test="password!=null">
-			AND password LIKE #{password}
+			AND password = #{password}
 		</if>
 	</select>
 	

@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tracycle.recycle.model.UserVO;
+import com.tracycle.recycle.domain.UserVO;
 import com.tracycle.recycle.service.UserService;
 
 import io.swagger.annotations.Api;
@@ -33,7 +33,7 @@ public class UserController {
 	private UserService userService;
 	
 	@ApiOperation(value="회원을 추가한다", response=UserVO.class)
-	@PostMapping("addEmployee")
+	@PostMapping("addUser")
 	public ResponseEntity<UserVO> addUser(@RequestBody UserVO user) throws Exception {
 		try {
 			userService.addUser(user);

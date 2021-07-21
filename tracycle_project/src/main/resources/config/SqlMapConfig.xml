@@ -3,19 +3,35 @@
 	"http://mybatis.org/dtd/mybatis-3-config.dtd">
 <configuration>	
 	 
+	<properties resource="config/dbconn.properties" /> 
+	 
 	<settings>
 		<setting name="mapUnderscoreToCamelCase" value="true"/>
 	</settings>
 	 
 	 
 	<typeAliases>
-		<package name="com.tracycle.recycle.model"/>
+		<package name="com.tracycle.recycle.domain"/>
 	</typeAliases>
 	
+	<environments default="develop">
+		<environment id="develop">
+			<transactionManager type="JDBC" />
+			<dataSource type="UNPOOLED">
+				<property name="driver" value="${jdbc.mysql.driver}"/>
+				<property name="url" value="${jdbc.mysql.url}"/>
+				<property name="username" value="${jdbc.mysql.username}"/>
+				<property name="password" value="${jdbc.mysql.password}"/>
+			</dataSource>
+		</environment>
+	</environments>
 
 	<mappers>
 		<mapper resource="sql/mybatis-tracycle-user-mapping.xml"/>
-		<!-- <mapper resource="sql/mybatis-tracycle-board-mapping.xml"/> -->
+		<!-- 
+		<mapper resource="sql/mybatis-tracycle-board-mapping.xml"/>
+ 		-->
+
 	</mappers>
 </configuration>
 
