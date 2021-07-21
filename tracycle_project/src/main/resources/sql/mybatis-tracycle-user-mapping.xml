@@ -4,12 +4,12 @@
 
 
 
-<mapper namespace="sql.user.mapper">
+<mapper namespace="UserMapper">
 	
 	<resultMap type="userVO" id="selectRM">
 		<result property="userId" column="user_id"/>
 		<result property="password" column="password"/>
-		<result property="userId" column="nickname"/>
+		<result property="nickName" column="nickname"/>
 		<result property="address" column="address"/>
 	</resultMap>
 
@@ -23,7 +23,7 @@
 		INTO user
 		(user_id, password, nickname, address)
 		VALUES
-		(#{userId},#{password},#{nickname},#{address})
+		(#{userId},#{password},#{nickName},#{address})
 	</insert>
 	
 	<!-- 로그인 -->
@@ -37,14 +37,14 @@
 	</select>
 	
 	<!-- 사용자 아이디 중복 검사 -->
-	<select id="checkUserId" parameterType="string">
+	<select id="checkUserId" parameterType="string" resultMap="selectRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{value}
 	</select>
 	
 	<!-- 사용자 검색 -->
-	<select id="findByUserId" parameterType="string">
+	<select id="findByUserId" parameterType="string" resultMap="selectRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{value}
@@ -54,7 +54,7 @@
 	<update id="updateUser" parameterType="userVO">
 		UPDATE user
 		SET 
-		nickname = #{nickname}
+		nickname = #{nickName},
 		address = #{address}
 		WHERE
 		user_id = #{userId}
@@ -64,6 +64,6 @@
 	<delete id="deleteUser" parameterType="string">
 		DELETE
 		FROM user
-		WHERE user_id = #(userId)
+		WHERE user_id = #{userId}
 	</delete>
 </mapper>

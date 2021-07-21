@@ -24,7 +24,9 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public boolean checkUserId(String userId) throws Exception {
+		System.out.println(userId);
 		UserVO checkedUser = userDao.checkUserId(userId);
+		System.out.println(checkedUser);
 		if (checkedUser == null) return true;
 		else return false;
 	}
