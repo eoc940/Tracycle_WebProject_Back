@@ -1,6 +1,6 @@
 package com.tracycle.recycle.service;
 
-import com.tracycle.recycle.model.UserVO;
+import com.tracycle.recycle.domain.UserVO;
 
 public interface UserService {
 

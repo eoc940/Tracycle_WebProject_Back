@@ -15,7 +15,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
-import com.tracycle.recycle.model.UserVO;
+import com.tracycle.recycle.domain.UserVO;
 import com.tracycle.recycle.service.UserService;
 
 import io.swagger.annotations.Api;

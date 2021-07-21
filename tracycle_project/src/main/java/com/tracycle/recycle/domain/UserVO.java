@@ -1,4 +1,4 @@
-package com.tracycle.recycle.model;
+package com.tracycle.recycle.domain;
 
 public class UserVO {
 	private String userId;
@@ -8,7 +8,12 @@ public class UserVO {
 	
 	
 	public UserVO() { }
-
+	
+	public UserVO(String userId, String password) {
+		super();
+		this.userId = userId;
+		this.password = password;
+	}
 
 	public UserVO(String userId, String password, String nickName, String address) {
 		super();

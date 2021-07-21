@@ -1,4 +1,4 @@
-package com.tracycle.recycle.model;
+package com.tracycle.recycle.domain;
 
 import java.util.List;
 
