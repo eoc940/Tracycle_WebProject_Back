@@ -1,6 +1,6 @@
 package com.tracycle.recycle.repository;
 
-import com.tracycle.recycle.model.UserVO;
+import com.tracycle.recycle.domain.UserVO;
 
 public interface UserDao {
 	

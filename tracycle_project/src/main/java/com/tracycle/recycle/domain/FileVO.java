@@ -1,4 +1,4 @@
-package com.tracycle.recycle.model;
+package com.tracycle.recycle.domain;
 
 public class FileVO {
 	private int fileId;
