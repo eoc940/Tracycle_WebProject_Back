@@ -4,9 +4,9 @@
 
 
 
-<mapper namespace="sql.board.mapper">
+<mapper namespace="BoardMapper">
 	
-	<resultMap type="user" id="selectRM">
+	<resultMap type="userVO" id="selectRM">
 		<result property="boardId" column="board_id"/>
 		<result property="title" column="title"/>
 		<result property="content" column="content"/> 
@@ -15,12 +15,17 @@
 		<result property="" column="picture"/>
 	</resultMap>
 
+	<!-- column 옆에  Alias 사용... -->
 	<sql id="select-board">
-		SELECT b.board_id board_id, b.title title, b.content content, 
-		b.date date, b.view_count view_count, u.user_id user_id, 
-		a.area_id area_id, a.area_name area_name, 
-		c.category_id category_id, c.category_name category_name 
+		SELECT 
+		b.board_id board_id, b.title title, b.content content, b.date date, b.viewCount viewCount, b.picture picture,
+		b.user_id user_id, u.nickName nickName, b.area_id area_id, a.area_name area_name, b.category_id category_id,
+		c.category_name category_name
 	</sql>
 
-	
+	<insert id="writeBoard">
+
+		
+		
+	</insert>
 </mapper>

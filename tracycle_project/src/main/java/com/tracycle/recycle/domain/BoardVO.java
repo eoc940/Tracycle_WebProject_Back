@@ -10,6 +10,7 @@ public class BoardVO {
 	private String content;
 	private String date;
 	private int viewCount;
+	private String picture;
 	private int status;
 	
 	private UserVO user;
@@ -21,7 +22,7 @@ public class BoardVO {
 	public BoardVO() { }
 
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status) {
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -32,7 +33,7 @@ public class BoardVO {
 	}
 
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, UserVO user,
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status, UserVO user,
 			AreaVO area, CategoryVO category, List<MultipartFile> files) {
 		super();
 		this.boardId = boardId;
@@ -95,6 +96,17 @@ public class BoardVO {
 
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
+	}
+	
+	
+
+	public String getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 
