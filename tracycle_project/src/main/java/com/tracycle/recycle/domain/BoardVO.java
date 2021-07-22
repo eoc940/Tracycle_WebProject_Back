@@ -11,17 +11,18 @@ public class BoardVO {
 	private String date;
 	private int viewCount;
 	private int status;
+	private String picture;
 	
 	private UserVO user;
 	private AreaVO area;
 	private CategoryVO category;
-	List<MultipartFile> files;
+	
 	
 	
 	public BoardVO() { }
 
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status) {
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, String picture) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -29,11 +30,22 @@ public class BoardVO {
 		this.date = date;
 		this.viewCount = viewCount;
 		this.status = status;
+		this.picture = picture;
+	}
+
+
+	public String getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
 	}
 
 
 	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, UserVO user,
-			AreaVO area, CategoryVO category, List<MultipartFile> files) {
+			AreaVO area, CategoryVO category) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -44,7 +56,7 @@ public class BoardVO {
 		this.user = user;
 		this.area = area;
 		this.category = category;
-		this.files = files;
+		
 	}
 
 
@@ -138,21 +150,12 @@ public class BoardVO {
 	}
 
 
-	public List<MultipartFile> getFiles() {
-		return files;
-	}
-
-
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
-	}
-
 
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", title=" + title + ", content=" + content + ", date=" + date
 				+ ", viewCount=" + viewCount + ", status=" + status + ", user=" + user + ", area=" + area
-				+ ", category=" + category + ", files=" + files + "]";
+				+ ", category=" + category + ", picture=" + picture + "]";
 	}
 	
 	
