@@ -23,7 +23,8 @@
 		INTO user
 		(user_id, password, nickname, address)
 		VALUES
-		(#{userId}, #{password}, #{nickName}, #{address})
+		(#{userId},#{password},#{nickName},#{address})
+
 	</insert>
 	
 	<!-- 로그인 -->

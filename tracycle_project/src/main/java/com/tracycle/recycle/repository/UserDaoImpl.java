@@ -21,29 +21,29 @@ public class UserDaoImpl implements UserDao {
 
 	@Override
 	public UserVO login(UserVO user) throws Exception {
-		return sqlSession.selectOne(ns + "login");
+		return sqlSession.selectOne(ns + "login", user);
 	}
 
 	@Override
 	public UserVO checkUserId(String userId) throws Exception {
-		return sqlSession.selectOne(ns + "checkUserId");
+		return sqlSession.selectOne(ns + "checkUserId", userId);
 	}
 
 	@Override
 	public UserVO findByUserId(String userId) throws Exception {
-		return sqlSession.selectOne(ns + "findByUserId");
+		return sqlSession.selectOne(ns + "findByUserId", userId);
 	}
 
 	@Override
 	public boolean updateUser(UserVO user) throws Exception {
-		int update = sqlSession.update(ns + "updateUser");
+		int update = sqlSession.update(ns + "updateUser", user);
 		if (update > 0) return true;
 		return false;
 	}
 
 	@Override
 	public boolean deleteUser(String userId) throws Exception {
-		int delete = sqlSession.delete(ns + "deleteUser");
+		int delete = sqlSession.delete(ns + "deleteUser", userId);
 		if (delete > 0) return true;
 		return false;
 	}

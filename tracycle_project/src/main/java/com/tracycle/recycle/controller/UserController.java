@@ -33,7 +33,7 @@ public class UserController {
 	private UserService userService;
 	
 	@ApiOperation(value="회원을 추가한다", response=UserVO.class)
-	@PostMapping("addEmployee")
+	@PostMapping("addUser")
 	public ResponseEntity<UserVO> addUser(@RequestBody UserVO user) throws Exception {
 		try {
 			userService.addUser(user);
@@ -45,7 +45,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value="로그인한다", response=UserVO.class)
-	@GetMapping("login")
+	@PostMapping("login")
 	public ResponseEntity<UserVO> login(@RequestParam String userId, @RequestParam String password) throws Exception {
 		try {
 			UserVO user = new UserVO();
@@ -64,6 +64,7 @@ public class UserController {
 	public ResponseEntity<Boolean> checkUserById(@PathVariable String userId) throws Exception {
 		try {
 			boolean isPossibleId = userService.checkUserId(userId);
+			System.out.println(isPossibleId);
 			return new ResponseEntity<Boolean>(isPossibleId, HttpStatus.OK);
 		}catch(RuntimeException e) {
 			e.printStackTrace();
