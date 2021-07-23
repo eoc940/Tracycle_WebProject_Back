@@ -193,5 +193,29 @@ public class BoardController {
 		}
 	}
 	
+	@ApiOperation(value="상태로 게시물을 검색한다", response=List.class)
+	@GetMapping("findByStatus/{status}")
+	public ResponseEntity<List<BoardVO>> findByStatus(@PathVariable int status) throws Exception {
+		try {
+			List<BoardVO> boardList = boardService.findByStatus(status);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="조회수를 1 추가한다", response=BoardVO.class)
+	@PutMapping("addViewCount/{boardId}")
+	public ResponseEntity<BoardVO> addViewCount(@PathVariable int boardId) throws Exception {
+		try {
+			boardService.addViewCount(boardId);
+			return new ResponseEntity<BoardVO>(HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	
 }
