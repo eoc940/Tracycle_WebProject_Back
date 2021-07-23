@@ -2,7 +2,6 @@ package com.tracycle.recycle.domain;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 	private int boardId;
@@ -16,11 +15,10 @@ public class BoardVO {
 	private UserVO user;
 	private AreaVO area;
 	private CategoryVO category;
-	List<MultipartFile> files;
 	
 	
 	public BoardVO() { }
-
+	
 
 	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status) {
 		super();
@@ -31,10 +29,10 @@ public class BoardVO {
 		this.viewCount = viewCount;
 		this.status = status;
 	}
-
+	
 
 	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status, UserVO user,
-			AreaVO area, CategoryVO category, List<MultipartFile> files) {
+			AreaVO area, CategoryVO category) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -45,7 +43,6 @@ public class BoardVO {
 		this.user = user;
 		this.area = area;
 		this.category = category;
-		this.files = files;
 	}
 
 
@@ -150,21 +147,13 @@ public class BoardVO {
 	}
 
 
-	public List<MultipartFile> getFiles() {
-		return files;
-	}
-
-
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
-	}
 
 
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", title=" + title + ", content=" + content + ", date=" + date
 				+ ", viewCount=" + viewCount + ", status=" + status + ", user=" + user + ", area=" + area
-				+ ", category=" + category + ", files=" + files + "]";
+				+ ", category=" + category + " ]";
 	}
 	
 	

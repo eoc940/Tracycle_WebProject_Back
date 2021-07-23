@@ -19,6 +19,15 @@ public class FileVO {
 		this.filePath = filePath;
 	}
 
+	public FileVO(String originalFileName, String fileName, String filePath, BoardVO board) {
+		super();
+		this.originalFileName = originalFileName;
+		this.fileName = fileName;
+		this.filePath = filePath;
+		this.board = board;
+	}	
+	
+	
 	public FileVO(int fileId, String originalFileName, String fileName, String filePath, BoardVO board) {
 		super();
 		this.fileId = fileId;
