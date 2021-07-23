@@ -4,10 +4,8 @@ package com.tracycle.recycle;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.io.Reader;
-<<<<<<< HEAD
+
 import java.util.HashMap;
-=======
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 import java.util.List;
 
 import org.apache.ibatis.io.Resources;
@@ -19,13 +17,9 @@ import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 import com.tracycle.recycle.domain.AreaVO;
 import com.tracycle.recycle.domain.BoardVO;
 import com.tracycle.recycle.domain.CategoryVO;
-<<<<<<< HEAD
 import com.tracycle.recycle.domain.CommentVO;
 import com.tracycle.recycle.domain.FileVO;
 import com.tracycle.recycle.domain.ResultVO;
-=======
-import com.tracycle.recycle.domain.FileVO;
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 import com.tracycle.recycle.domain.UserVO;
 
 public class testClass {
@@ -38,20 +32,19 @@ public class testClass {
 		SqlSessionFactory factory = new SqlSessionFactoryBuilder().build(r);
 		
 		// 3. SqlSession
-		SqlSession session = factory.openSession();
-		
+		SqlSession session = factory.openSession();		
 		// 4. 쿼리문 실행...
 		
 		//user mapping Test..
 		
 		//1. addUser Test...
-<<<<<<< HEAD
+
 		
 //		UserVO user = new UserVO("23Corss", "Cucu", "짱구 ", "서울시 종로구 평창동");
-=======
+
 //		
 //		UserVO user = new UserVO("2314", "qwer", "봄여름가을겨울", "서울시 동대문구 전농동");
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
+
 //		session.insert("UserMapper.addUser", user);
 //		session.commit();
 		
@@ -96,22 +89,17 @@ public class testClass {
 		//1. writeBoard Test..
 		
 //		BoardVO board = new BoardVO();
-<<<<<<< HEAD
+
 //		board.setTitle("여름아 부탁해!!");
 //		board.setContent("바다에 보내줘!!!.");
-=======
 //		board.setTitle("덥다 덥다고!!");
 //		board.setContent("계곡에 놀러가자.");
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 //		board.setDate("2021-07-23");
 //		board.setPicture("img/bread");
 //		board.setViewCount(0);
 //		board.setStatus(0);
-<<<<<<< HEAD
 //		board.setUser(new UserVO("23Corss"));
-=======
 //		board.setUser(new UserVO("2314"));
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 //		board.setArea(new AreaVO(3));
 //		board.setCategory(new CategoryVO(2));
 //		System.out.println(board);
@@ -210,7 +198,6 @@ public class testClass {
 //		System.out.println(list);
 
 
-<<<<<<< HEAD
 //     ============================================================================
 		
 		//  comment mapping Test
@@ -268,9 +255,7 @@ public class testClass {
 		map.put("categoryId", 1);
 		ResultVO result = session.selectOne("ResultMapper.getResult", map);
 		System.out.println(result);
-		
-=======
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
+
 		
 	}
 }

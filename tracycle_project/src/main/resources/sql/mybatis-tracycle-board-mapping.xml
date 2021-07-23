@@ -40,20 +40,12 @@
 	<sql id="select-board">
 	SELECT 
 	b.board_id board_id, b.title title, b.content content, b.date date, b.view_count view_count, b.picture picture,
-<<<<<<< HEAD
 	b.status status, b.user_id user_id,u.password password, u.nickname nickname, u.address address,
-=======
-	b.status status, b.user_id user_id,u.password password, u.nickName nickName, u.address address,
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 	b.area_id area_id, a.area_name area_name, b.category_id category_id, c.category_name category_name
 	</sql>
 
 
-<<<<<<< HEAD
  	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="false" keyProperty="board_id">
-=======
- 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="true" keyProperty="board_id">
->>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 		INSERT 
 		INTO board
 		(title, content, date, picture, view_count, status, user_id, area_id, category_id)
