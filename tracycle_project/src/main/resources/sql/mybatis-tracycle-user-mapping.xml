@@ -6,7 +6,7 @@
 
 <mapper namespace="UserMapper">
 	
-	<resultMap type="userVO" id="selectRM">
+	<resultMap type="userVO" id="userRM">
 		<result property="userId" column="user_id"/>
 		<result property="password" column="password"/>
 		<result property="nickName" column="nickname"/>
@@ -28,7 +28,7 @@
 	</insert>
 	
 	<!-- 로그인 -->
-	<select id="login" parameterType="userVO" resultMap="selectRM">
+	<select id="login" parameterType="userVO" resultMap="userRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{userId}
@@ -38,14 +38,14 @@
 	</select>
 	
 	<!-- 사용자 아이디 중복 검사 -->
-	<select id="checkUserId" parameterType="string" resultMap="selectRM">
+	<select id="checkUserId" parameterType="string" resultMap="userRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{value}
 	</select>
 	
 	<!-- 사용자 검색 -->
-	<select id="findByUserId" parameterType="string" resultMap="selectRM">
+	<select id="findByUserId" parameterType="string" resultMap="userRM">
 		<include refid="select-user" />
 		FROM user
 		WHERE user_id = #{value}

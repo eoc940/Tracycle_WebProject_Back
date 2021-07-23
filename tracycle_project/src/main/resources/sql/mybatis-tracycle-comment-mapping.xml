@@ -1,0 +1,85 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+
+
+<mapper namespace="CommentMapper">
+	
+	<resultMap type="userVO" id="userRM">
+		<id property="userId" column="user_id"/>
+			<result property="password" column="password"/>
+			<result property="nickName" column="nickname"/>
+			<result property="address" column="address"/>
+	</resultMap>
+	
+	<resultMap type="boardVO" id="boardRM">
+		<id property="boardId" column="board_id"/>
+			<result property="title" column="title"/>
+			<result property="content" column="content"/>
+			<result property="date" column="date"/>
+			<result property="viewCount" column="view_count"/>
+			<result property="picture" column="picture"/>
+	</resultMap>
+	
+	<resultMap type="commentVO" id="commentRM">
+		<id property="commentId" column="comment_id"/>
+			<result property="date" column="date"/>
+			<result property="content" column="content"/>
+			<result property="secret" column="secret"/>
+		<collection property="user" resultMap="userRM" />
+		<collection property="board" resultMap="boardRM" />
+	</resultMap>
+	
+	<sql id="select-comment">
+	SELECT 
+	c.comment_id comment_id, c.date date, c.content content, c.secret secret, c.user_id user_id,
+	u.nickname nickname, c.board_id board_id, b.title title, b.content content, b.picture picture  
+	</sql>
+	
+	<insert id="writeComment" parameterType="commentVO">
+		INSERT
+		INTO comment
+		(date, content, secret, user_id, board_id)
+		VALUES
+		(#{date}, #{content}, #{secret}, #{user.userId}, #{board.boardId})
+	</insert>
+	
+	
+	<update id="updateComment" parameterType="commentVO">
+		UPDATE comment
+		SET
+		date = #{date},
+		content = #{content},
+		secret = #{secret},
+		user_id = #{user.userId},
+		board_id = #{board.boardId}
+		WHERE comment_id = #{commentId}
+	</update>
+
+	
+	<delete id="deleteComment" parameterType="int">
+		DELETE 
+		FROM comment
+		WHERE comment_id = #{value}
+	</delete>
+	
+	<select id="getAllComment" parameterType="int" resultMap="commentRM">
+	    <include refid="select-comment" />
+		FROM comment c LEFT JOIN user u on c.user_id = u.user_id
+		JOIN board b on c.board_id = b.board_id
+		WHERE c.board_id = #{value}
+		ORDER BY comment_id DESC;
+	</select>
+	
+	
+	<select id="findCommentById" parameterType="string" resultMap="commentRM">
+		<include refid="select-comment" />
+		FROM comment c LEFT JOIN user u on c.user_id = u.user_id
+		JOIN board b on c.board_id = b.board_id
+		WHERE c.user_id = #{value}
+		ORDER BY comment_id DESC;
+		
+	</select>
+	
+</mapper>
