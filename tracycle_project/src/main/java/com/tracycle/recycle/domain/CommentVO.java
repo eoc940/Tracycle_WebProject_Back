@@ -10,6 +10,8 @@ public class CommentVO {
 	private BoardVO board;
 	
 	public CommentVO() { }
+	
+	
 
 	public CommentVO(int commentId, String date, String content, int secret) {
 		super();
@@ -17,6 +19,15 @@ public class CommentVO {
 		this.date = date;
 		this.content = content;
 		this.secret = secret;
+	}
+	
+	public CommentVO(String date, String content, int secret, UserVO user, BoardVO board) {
+		super();
+		this.date = date;
+		this.content = content;
+		this.secret = secret;
+		this.user = user;
+		this.board = board;
 	}
 
 	public CommentVO(int commentId, String date, String content, int secret, UserVO user, BoardVO board) {

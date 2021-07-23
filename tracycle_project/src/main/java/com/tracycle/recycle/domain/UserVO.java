@@ -9,6 +9,11 @@ public class UserVO {
 	
 	public UserVO() { }
 	
+	public UserVO(String userId) {
+		super();
+		this.userId = userId;
+	}
+	
 	public UserVO(String userId, String password) {
 		super();
 		this.userId = userId;

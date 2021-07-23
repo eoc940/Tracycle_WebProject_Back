@@ -2,7 +2,6 @@ package com.tracycle.recycle.domain;
 
 import java.util.List;
 
-import org.springframework.web.multipart.MultipartFile;
 
 public class BoardVO {
 	private int boardId;
@@ -10,18 +9,21 @@ public class BoardVO {
 	private String content;
 	private String date;
 	private int viewCount;
+	private String picture;
 	private int status;
 	
 	private UserVO user;
 	private AreaVO area;
 	private CategoryVO category;
-	List<MultipartFile> files;
+
 	
 	
 	public BoardVO() { }
+	
 
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status) {
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, String picture) {
+
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -29,22 +31,24 @@ public class BoardVO {
 		this.date = date;
 		this.viewCount = viewCount;
 		this.status = status;
+		this.picture = picture;
 	}
 
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, UserVO user,
-			AreaVO area, CategoryVO category, List<MultipartFile> files) {
+
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status, UserVO user,
+			AreaVO area, CategoryVO category) {
 		super();
 		this.boardId = boardId;
 		this.title = title;
 		this.content = content;
 		this.date = date;
 		this.viewCount = viewCount;
+		this.picture = picture;
 		this.status = status;
 		this.user = user;
 		this.area = area;
 		this.category = category;
-		this.files = files;
 	}
 
 
@@ -96,6 +100,17 @@ public class BoardVO {
 	public void setViewCount(int viewCount) {
 		this.viewCount = viewCount;
 	}
+	
+	
+
+	public String getPicture() {
+		return picture;
+	}
+
+
+	public void setPicture(String picture) {
+		this.picture = picture;
+	}
 
 
 	public int getStatus() {
@@ -138,21 +153,12 @@ public class BoardVO {
 	}
 
 
-	public List<MultipartFile> getFiles() {
-		return files;
-	}
-
-
-	public void setFiles(List<MultipartFile> files) {
-		this.files = files;
-	}
-
 
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", title=" + title + ", content=" + content + ", date=" + date
 				+ ", viewCount=" + viewCount + ", status=" + status + ", user=" + user + ", area=" + area
-				+ ", category=" + category + ", files=" + files + "]";
+				+ ", category=" + category + ", picture=" + picture + "]";
 	}
 	
 	
