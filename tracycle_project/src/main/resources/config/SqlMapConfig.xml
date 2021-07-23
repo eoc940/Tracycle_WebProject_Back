@@ -29,7 +29,6 @@
 	<mappers>
 		<mapper resource="sql/mybatis-tracycle-user-mapping.xml"/>
 		<mapper resource="sql/mybatis-tracycle-board-mapping.xml"/>
-
 	</mappers>
 </configuration>
 

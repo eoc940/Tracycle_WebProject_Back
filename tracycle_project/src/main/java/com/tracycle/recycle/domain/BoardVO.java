@@ -15,12 +15,15 @@ public class BoardVO {
 	private UserVO user;
 	private AreaVO area;
 	private CategoryVO category;
+
 	
 	
 	public BoardVO() { }
 	
 
-	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status) {
+
+	public BoardVO(int boardId, String title, String content, String date, int viewCount, int status, String picture) {
+
 		super();
 		this.boardId = boardId;
 		this.title = title;
@@ -28,8 +31,10 @@ public class BoardVO {
 		this.date = date;
 		this.viewCount = viewCount;
 		this.status = status;
+		this.picture = picture;
 	}
-	
+
+
 
 	public BoardVO(int boardId, String title, String content, String date, int viewCount, String picture, int status, UserVO user,
 			AreaVO area, CategoryVO category) {
@@ -39,6 +44,7 @@ public class BoardVO {
 		this.content = content;
 		this.date = date;
 		this.viewCount = viewCount;
+		this.picture = picture;
 		this.status = status;
 		this.user = user;
 		this.area = area;
@@ -148,12 +154,11 @@ public class BoardVO {
 
 
 
-
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", title=" + title + ", content=" + content + ", date=" + date
 				+ ", viewCount=" + viewCount + ", status=" + status + ", user=" + user + ", area=" + area
-				+ ", category=" + category + " ]";
+				+ ", category=" + category + ", picture=" + picture + "]";
 	}
 	
 	
