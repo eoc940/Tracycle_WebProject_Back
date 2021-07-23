@@ -92,13 +92,13 @@ public class testClass {
 //		session.commit();
 		
 		
-		// getAllBoard Test...
+		//1. getAllBoard Test
 		
 //		List<BoardVO> list = session.selectList("BoardMapper.getAllBoard");
 //		for(BoardVO vo : list) System.out.println(vo);
 		
 		
-		//2. updateBoard Test..
+		//2. updateBoard Test
 		
 //		BoardVO board = new BoardVO();
 //		board.setBoardId(1);
@@ -124,7 +124,7 @@ public class testClass {
 //		session.commit();
 		
 		
-		//4. findByTitle Test...
+		//4. findByTitle Test
 		
 //		List<BoardVO> list = session.selectList("BoardMapper.findByTitle", "휴가");
 //		System.out.println(list);
@@ -163,6 +163,25 @@ public class testClass {
 		
 		//10. addFile Test
 		
+//		BoardVO board = new BoardVO();
+//		board.setBoardId(19);
+//		FileVO file = new FileVO("c", "f", "g", board);
+//		session.insert("BoardMapper.addFile", file);
+//		session.commit();
+//		System.out.println(file);
+		
+		
+		//11. getBoard Test
+		
+//		BoardVO board = session.selectOne("BoardMapper.getBoard", 18);
+//		System.out.println(board);
+		
+		
+		//12. getFiles Test
+		
+//		List<FileVO> list = session.selectList("BoardMapper.getFiles", 19);
+//		System.out.println(list);
+
 
 		
 	}

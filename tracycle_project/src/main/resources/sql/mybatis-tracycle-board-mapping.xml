@@ -142,5 +142,22 @@
 		(#{board.boardId}, #{originalFileName}, #{fileName}, #{filePath})
 	</insert>
 	
-			
+	
+	<select id="getBoard" parameterType="int" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE board_id = #{value}
+	</select> 
+	
+	<select id="getFiles" parameterType="int" resultType="fileVO">
+		SELECT	
+		board_id, original_filename, filename, filepath
+		FROM file
+		WHERE board_id = #{value}
+		ORDER BY board_id DESC
+	</select>	
+	
+				
 </mapper>
