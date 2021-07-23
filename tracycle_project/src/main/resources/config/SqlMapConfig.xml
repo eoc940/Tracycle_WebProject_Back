@@ -29,8 +29,11 @@
 	<mappers>
 		<mapper resource="sql/mybatis-tracycle-user-mapping.xml"/>
 		<mapper resource="sql/mybatis-tracycle-board-mapping.xml"/>
+<<<<<<< HEAD
 		<mapper resource="sql/mybatis-tracycle-comment-mapping.xml"/>
 		<mapper resource="sql/mybatis-tracycle-result-mapping.xml"/>
+=======
+>>>>>>> 32ed5c561592fd8cb6a28640b3b3ac4a8300cab4
 	</mappers>
 </configuration>
 
