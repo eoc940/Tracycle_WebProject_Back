@@ -5,6 +5,11 @@ public class CategoryVO {
 	private String categoryName;
 	
 	public CategoryVO() { }
+	
+	public CategoryVO(int categoryId) {
+		super();
+		this.categoryId = categoryId;
+	}
 
 	public CategoryVO(int categoryId, String categoryName) {
 		super();

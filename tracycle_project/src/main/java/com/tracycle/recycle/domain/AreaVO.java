@@ -6,6 +6,12 @@ public class AreaVO {
 	
 	public AreaVO() { }
 	
+	public AreaVO(int areaId) {
+		super();
+		this.areaId = areaId;
+	}
+	
+	
 	public AreaVO(int areaId, String areaName) {
 		super();
 		this.areaId = areaId;
