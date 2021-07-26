@@ -13,6 +13,7 @@
 			<result property="address" column="address"/>
 	</resultMap>
 	
+	
 	<resultMap type="boardVO" id="boardRM">
 		<id property="boardId" column="board_id"/>
 			<result property="title" column="title"/>
@@ -20,6 +21,7 @@
 			<result property="date" column="date"/>
 			<result property="viewCount" column="view_count"/>
 			<result property="picture" column="picture"/>
+		<collection property="user" resultMap="userRM" />
 	</resultMap>
 	
 	<resultMap type="commentVO" id="commentRM">
@@ -34,7 +36,9 @@
 	<sql id="select-comment">
 	SELECT 
 	c.comment_id comment_id, c.date date, c.content content, c.secret secret, c.user_id user_id,
-	u.nickname nickname, c.board_id board_id, b.title title, b.content content, b.picture picture  
+	u.password password, u.nickname nickname, u.address address, c.board_id board_id, 
+	b.title title, b.content content, b.date date, b.view_count view_count, b.status status, 
+	b.user_id user_id, b.picture picture  
 	</sql>
 	
 	<insert id="writeComment" parameterType="commentVO">
@@ -66,7 +70,7 @@
 	
 	<select id="getAllComment" parameterType="int" resultMap="commentRM">
 	    <include refid="select-comment" />
-		FROM comment c LEFT JOIN user u on c.user_id = u.user_id
+		FROM comment c LEFT JOIN user u on c.user_id = u.user_id 
 		JOIN board b on c.board_id = b.board_id
 		WHERE c.board_id = #{value}
 		ORDER BY comment_id DESC;

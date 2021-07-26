@@ -172,7 +172,7 @@ public class testClass {
 		//9. addViewCount Test
 		
 //		BoardVO board = new BoardVO();
-//		session.update("BoardMapper.addViewCount", 1);
+//		session.update("BoardMapper.addViewCount", 5);
 //		session.commit();
 		
 		
@@ -250,11 +250,11 @@ public class testClass {
 		
 		//1. getResult
 		
-		HashMap<String, Object> map  = new HashMap<String, Object>();
-		map.put("areaId", 1);
-		map.put("categoryId", 1);
-		ResultVO result = session.selectOne("ResultMapper.getResult", map);
-		System.out.println(result);
+//		HashMap<String, Object> map  = new HashMap<String, Object>();
+//		map.put("areaId", 1);
+//		map.put("categoryId", 1);
+//		ResultVO result = session.selectOne("ResultMapper.getResult", map);
+//		System.out.println(result);
 
 		
 	}
