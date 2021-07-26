@@ -1,5 +1,7 @@
 package com.tracycle.recycle.controller;
 
+import javax.servlet.http.HttpSession;
+
 import org.apache.ibatis.annotations.Param;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -46,13 +48,28 @@ public class UserController {
 	
 	@ApiOperation(value="로그인한다", response=UserVO.class)
 	@PostMapping("login")
-	public ResponseEntity<UserVO> login(@RequestParam String userId, @RequestParam String password) throws Exception {
+	public ResponseEntity<UserVO> login(@RequestParam String userId, @RequestParam String password,
+			HttpSession session) throws Exception {
 		try {
 			UserVO user = new UserVO();
 			user.setUserId(userId);
 			user.setPassword(password);
-			UserVO loginUser = userService.login(user);
-			return new ResponseEntity<UserVO>(loginUser, HttpStatus.OK);
+			UserVO loginUser = userService.login(user, session);
+			if (loginUser != null) 
+				return new ResponseEntity<UserVO>(loginUser, HttpStatus.OK);
+			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT); 
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="로그아웃한다", response=UserVO.class)
+	@GetMapping("logout")
+	public ResponseEntity<UserVO> logout(HttpSession session) throws Exception {
+		try {
+			userService.logout(session);
+			return new ResponseEntity<UserVO>(HttpStatus.OK);
 		}catch(RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT);

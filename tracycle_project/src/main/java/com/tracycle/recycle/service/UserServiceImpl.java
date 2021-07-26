@@ -1,5 +1,7 @@
 package com.tracycle.recycle.service;
 
+import javax.servlet.http.HttpSession;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,8 +20,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO login(UserVO user) throws Exception {
+	public UserVO login(UserVO user, HttpSession session) throws Exception {
+		session.setAttribute("user", user);
 		return userDao.login(user);
+	}
+	
+	@Override
+	public void logout(HttpSession session) throws Exception {
+		session.removeAttribute("user");
 	}
 
 	@Override
@@ -45,5 +53,7 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteUser(String userId) throws Exception {
 		return userDao.deleteUser(userId);
 	}
+
+	
 	
 }

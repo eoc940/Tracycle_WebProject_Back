@@ -25,6 +25,7 @@ public class CommentDaoImpl implements CommentDao {
 	@Override
 	public boolean updateComment(CommentVO comment) throws Exception {
 		int updated = sqlSession.update(ns + "updateComment", comment);
+		System.out.println(updated + " DAO!!");
 		if (updated > 0) return true;
 		return false;
 	}

@@ -76,6 +76,11 @@ public class BoardDaoImpl implements BoardDao {
 	public void addViewCount(int boardId)  throws Exception{
 		sqlSession.update(ns + "addViewCount", boardId);
 	}
+	
+	@Override
+	public void deleteFiles(int boardId) throws Exception {
+		sqlSession.delete(ns + "deleteFiles", boardId);
+	}
 
 	@Override
 	public void addFile(FileVO file) throws Exception {
@@ -91,5 +96,7 @@ public class BoardDaoImpl implements BoardDao {
 	public List<FileVO> getFiles(int boardId) throws Exception {
 		return sqlSession.selectList(ns + "getFiles", boardId);
 	}
+
+	
 
 }
