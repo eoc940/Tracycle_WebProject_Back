@@ -80,7 +80,6 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public void deleteFiles(int boardId) throws Exception {
 		sqlSession.delete(ns + "deleteFiles", boardId);
-		
 	}
 
 	@Override

@@ -55,9 +55,7 @@
 		SET
 		date = #{date},
 		content = #{content},
-		secret = #{secret},
-		user_id = #{user.userId},
-		board_id = #{board.boardId}
+		secret = #{secret}
 		WHERE comment_id = #{commentId}
 	</update>
 

@@ -114,6 +114,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(origMainFileName);
 			boolean isUpdated = boardService.updateBoard(board);
+			System.out.println("updated 되었나? " + isUpdated);
 			boardService.deleteFiles(board.getBoardId());
 //			if (isUpdated) return new ResponseEntity<BoardVO>(HttpStatus.OK);
 //			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
@@ -260,6 +261,8 @@ public class BoardController {
 			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
 		}
 	}
+	
+	
 	
 	
 }

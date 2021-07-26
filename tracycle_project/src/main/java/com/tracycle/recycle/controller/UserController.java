@@ -55,7 +55,9 @@ public class UserController {
 			user.setUserId(userId);
 			user.setPassword(password);
 			UserVO loginUser = userService.login(user, session);
-			return new ResponseEntity<UserVO>(loginUser, HttpStatus.OK);
+			if (loginUser != null) 
+				return new ResponseEntity<UserVO>(loginUser, HttpStatus.OK);
+			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT); 
 		}catch(RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT);
@@ -63,7 +65,7 @@ public class UserController {
 	}
 	
 	@ApiOperation(value="로그아웃한다", response=UserVO.class)
-	@RequestMapping("logout")
+	@GetMapping("logout")
 	public ResponseEntity<UserVO> logout(HttpSession session) throws Exception {
 		try {
 			userService.logout(session);
