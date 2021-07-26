@@ -208,8 +208,8 @@ public class testClass {
 //		BoardVO board = new BoardVO();
 //		board.setBoardId(5);
 //		UserVO user = new UserVO();
-//		user.setUserId("23Corss");
-//		CommentVO comment = new CommentVO("2021-07-23", "무플 방지 위원회 회장", 0, user, board );
+//		user.setUserId("1234");
+//		CommentVO comment = new CommentVO("2021-07-23", "선제시 하시오!!", 0, user, board );
 //		session.insert("CommentMapper.writeComment", comment);
 //		session.commit();
 		
@@ -227,15 +227,15 @@ public class testClass {
 		
 		//3. deleteComment Test
 		
-//		int row = session.delete("CommentMapper.deleteComment", 3);
+//		int row = session.delete("CommentMapper.deleteComment", 8);
 //		session.commit();
 //		System.out.println(row);
 		
 		
 		//4. getAllComment
 		
-//		List<CommentVO> list = session.selectList("CommentMapper.getAllComment", 5);
-//		System.out.println(list);
+		List<CommentVO> list = session.selectList("CommentMapper.getAllComment", 5);
+		System.out.println(list);
 		
 		//5. findCommentById
 		
