@@ -1,10 +1,15 @@
 package com.tracycle.recycle.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
+import java.util.ArrayList;
 import java.util.List;
 
+import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -21,8 +26,10 @@ import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
 import com.tracycle.recycle.domain.BoardVO;
+import com.tracycle.recycle.domain.CommentVO;
 import com.tracycle.recycle.domain.FileVO;
 import com.tracycle.recycle.service.BoardService;
+import com.tracycle.recycle.service.CommentService;
 import com.tracycle.recycle.util.MD5Generator;
 
 import io.swagger.annotations.Api;
@@ -36,6 +43,9 @@ public class BoardController {
 
 	@Autowired
 	private BoardService boardService;
+	
+	@Autowired
+	private CommentService commentService;
 	
 	@ApiOperation(value="게시글을 작성한다", response=BoardVO.class)
 	@PostMapping("writeBoard")
@@ -261,6 +271,49 @@ public class BoardController {
 			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
 		}
 	}
+	
+	@ApiOperation(value="게시글 상세정보", response=BoardVO.class)
+	@GetMapping("getBoard/{boardId}")
+	public ResponseEntity<BoardVO> getBoard(@PathVariable int boardId) throws Exception {
+		try {
+			BoardVO board = boardService.getBoard(boardId);
+			return new ResponseEntity<BoardVO>(board, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="게시글의 댓글 리스트", response=List.class)
+	@GetMapping("getComments/{boardId}")
+	public ResponseEntity<List<CommentVO>> getComments(@PathVariable int boardId) throws Exception {
+		try {
+			List<CommentVO> commentList = commentService.getAllComment(boardId);
+			return new ResponseEntity<List<CommentVO>>(commentList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<CommentVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="게시글의 사진 파일들 출력", response=List.class)
+	@GetMapping("getFiles/boardId")
+	public ResponseEntity<List<byte[]>> getFiles(@PathVariable int boardId) throws Exception {
+		try {
+			List<FileVO> fileList = boardService.getFiles(boardId);
+			List<byte[]> imageList = new ArrayList<byte[]>();
+			for(FileVO file : fileList) {
+				InputStream in = getClass().getResourceAsStream(file.getFilePath());
+				byte[] byteArray = IOUtils.toByteArray(in);
+				imageList.add(byteArray);
+			}
+			return new ResponseEntity<List<byte[]>>(imageList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<byte[]>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	
 	
 	
