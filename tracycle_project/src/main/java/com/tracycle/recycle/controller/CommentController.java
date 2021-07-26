@@ -69,7 +69,7 @@ public class CommentController {
 	}
 	
 	@ApiOperation(value="모든 댓글을 출력한다", response=List.class)
-	@GetMapping("getAllCommnet/{boardId}")
+	@GetMapping("getAllComment/{boardId}")
 	public ResponseEntity<List<CommentVO>> getAllComment(@PathVariable int boardId) throws Exception {
 		try {
 			List<CommentVO> commentList = commentService.getAllComment(boardId);

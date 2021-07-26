@@ -74,6 +74,11 @@ public class BoardServiceImpl implements BoardService {
 	public void addFile(FileVO file) throws Exception {
 		boardDao.addFile(file);
 	}
+	
+	@Override
+	public void deleteFiles(int boardId) throws Exception {
+		boardDao.deleteFiles(boardId);
+	}
 
 	@Override
 	public BoardVO getBoard(int boardId) throws Exception {
@@ -84,5 +89,7 @@ public class BoardServiceImpl implements BoardService {
 	public List<FileVO> getFiles(int boardId) throws Exception {
 		return boardDao.getFiles(boardId);
 	}
+
+	
 
 }

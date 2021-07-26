@@ -20,6 +20,7 @@ public interface BoardDao {
 	void addViewCount(int boardId) throws Exception;
 	//추가
 	void addFile(FileVO file) throws Exception;
+	void deleteFiles(int boardId) throws Exception;
 	BoardVO getBoard(int boardId) throws Exception;
 	List<FileVO> getFiles(int boardId) throws Exception;
 }
