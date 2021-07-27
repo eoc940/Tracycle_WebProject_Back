@@ -9,6 +9,8 @@
 	<resultMap type="areaVO" id="areaRM">
 		<id property="areaId" column="area_id"/>
 			<result property="areaName" column="area_name"/>
+			<result property="url" column="url"/>
+			<result property="telephone" column="telephone"/>
 	</resultMap>
 	
 	
@@ -22,16 +24,15 @@
 			<result property="price" column="price"/>
 			<result property="standard" column="standard"/>
 			<result property="description" column="description"/>
-			<result property="url" column="url"/>
-			<result property="telephone" column="telephone"/>
+			
 		<collection property="area" resultMap="areaRM" />
 		<collection property="category" resultMap="categoryRM" />
 	</resultMap>
 
 	<select id="getResult" parameterType="hashmap" resultMap="resultRM">
 		SELECT 
-		r.result_id result_id, r.price price, r.standard standard, r.description description, r.url url, r.telephone telephone,
-		r.area_id area_id, a.area_name area_name, r.category_id category_id, c.category_name
+		r.result_id result_id, r.price price, r.standard standard, r.description description, 
+		r.area_id area_id, a.area_name area_name, a.url url, a.telephone telephone, r.category_id category_id, c.category_name
 		FROM result r LEFT JOIN area a on r.area_id = a.area_id
 		JOIN category c on r.category_id = c.category_id
 		WHERE r.area_id = #{areaId} AND r.category_id = #{categoryId}

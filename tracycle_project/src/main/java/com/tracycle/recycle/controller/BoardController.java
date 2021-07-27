@@ -25,7 +25,9 @@ import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 import org.springframework.web.multipart.MultipartFile;
 
+import com.tracycle.recycle.domain.AreaVO;
 import com.tracycle.recycle.domain.BoardVO;
+import com.tracycle.recycle.domain.CategoryVO;
 import com.tracycle.recycle.domain.CommentVO;
 import com.tracycle.recycle.domain.FileVO;
 import com.tracycle.recycle.service.BoardService;
@@ -311,6 +313,30 @@ public class BoardController {
 		}catch(RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<byte[]>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="전체 지역 출력", response=List.class)
+	@GetMapping("getAllArea")
+	public ResponseEntity<List<AreaVO>> getAllArea() throws Exception {
+		try {
+			List<AreaVO> areaList = boardService.getAllArea();
+			return new ResponseEntity<List<AreaVO>>(areaList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<AreaVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="전체 폐기물 목록 출력", response=List.class)
+	@GetMapping("getAllCategory")
+	public ResponseEntity<List<CategoryVO>> getAllCategory() throws Exception {
+		try {
+			List<CategoryVO> categoryList = boardService.getAllCategory();
+			return new ResponseEntity<List<CategoryVO>>(categoryList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<CategoryVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
 	

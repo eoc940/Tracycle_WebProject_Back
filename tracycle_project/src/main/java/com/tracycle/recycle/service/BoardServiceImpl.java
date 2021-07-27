@@ -5,7 +5,9 @@ import java.util.List;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import com.tracycle.recycle.domain.AreaVO;
 import com.tracycle.recycle.domain.BoardVO;
+import com.tracycle.recycle.domain.CategoryVO;
 import com.tracycle.recycle.domain.FileVO;
 import com.tracycle.recycle.repository.BoardDao;
 
@@ -88,6 +90,16 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public List<FileVO> getFiles(int boardId) throws Exception {
 		return boardDao.getFiles(boardId);
+	}
+
+	@Override
+	public List<AreaVO> getAllArea() throws Exception {
+		return boardDao.getAllArea();
+	}
+
+	@Override
+	public List<CategoryVO> getAllCategory() throws Exception {
+		return boardDao.getAllCategory();
 	}
 
 	

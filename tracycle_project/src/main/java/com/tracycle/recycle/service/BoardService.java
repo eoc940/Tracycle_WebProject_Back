@@ -2,7 +2,9 @@ package com.tracycle.recycle.service;
 
 import java.util.List;
 
+import com.tracycle.recycle.domain.AreaVO;
 import com.tracycle.recycle.domain.BoardVO;
+import com.tracycle.recycle.domain.CategoryVO;
 import com.tracycle.recycle.domain.FileVO;
 
 public interface BoardService {
@@ -23,5 +25,7 @@ public interface BoardService {
 	void deleteFiles(int boardId) throws Exception;
 	BoardVO getBoard(int boardId) throws Exception;
 	List<FileVO> getFiles(int boardId) throws Exception;
+	List<AreaVO> getAllArea() throws Exception;
+	List<CategoryVO> getAllCategory() throws Exception;
 
 }

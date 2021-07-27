@@ -6,7 +6,9 @@ import org.apache.ibatis.session.SqlSession;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
 
+import com.tracycle.recycle.domain.AreaVO;
 import com.tracycle.recycle.domain.BoardVO;
+import com.tracycle.recycle.domain.CategoryVO;
 import com.tracycle.recycle.domain.FileVO;
 
 @Repository
@@ -95,6 +97,16 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public List<FileVO> getFiles(int boardId) throws Exception {
 		return sqlSession.selectList(ns + "getFiles", boardId);
+	}
+
+	@Override
+	public List<AreaVO> getAllArea() throws Exception {
+		return sqlSession.selectList(ns + "getAllArea");
+	}
+
+	@Override
+	public List<CategoryVO> getAllCategory() throws Exception {
+		return sqlSession.selectList(ns + "getAllCategory");
 	}
 
 	
