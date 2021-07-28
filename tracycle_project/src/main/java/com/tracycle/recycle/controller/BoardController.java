@@ -30,6 +30,7 @@ import com.tracycle.recycle.domain.BoardVO;
 import com.tracycle.recycle.domain.CategoryVO;
 import com.tracycle.recycle.domain.CommentVO;
 import com.tracycle.recycle.domain.FileVO;
+import com.tracycle.recycle.domain.UserVO;
 import com.tracycle.recycle.service.BoardService;
 import com.tracycle.recycle.service.CommentService;
 import com.tracycle.recycle.util.MD5Generator;
@@ -51,11 +52,23 @@ public class BoardController {
 	
 	@ApiOperation(value="게시글을 작성한다", response=BoardVO.class)
 	@PostMapping("writeBoard")
-	public ResponseEntity<BoardVO> writeBoard(@RequestBody BoardVO board, 
+	public ResponseEntity<BoardVO> writeBoard(BoardVO board,
+			@RequestParam("userId") String userId,
+			@RequestParam("areaId") int areaId,
+			@RequestParam("categoryId") int categoryId,
 			@RequestParam("mainFile") MultipartFile mainFile, 
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		
 		try {
+			System.out.println(board);
+			System.out.println(userId + areaId + categoryId);
+			board.setUser(new UserVO(userId));
+			board.setArea(new AreaVO(areaId));
+			board.setCategory(new CategoryVO(categoryId));
+			System.out.println(board);
+			System.out.println(mainFile);
+			System.out.println(files);
+			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
 			String savePath = System.getProperty("user.dir") + "\\files";
@@ -68,8 +81,9 @@ public class BoardController {
 			}
 			String filePath = savePath + "\\" + mainFileName;
 			mainFile.transferTo(new File(filePath));
-			board.setPicture(origMainFileName);
+			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
+			System.out.println("!@#@!"+board);
 			//mFile mainFile
 			FileVO mFile = new FileVO();
 			mFile.setBoard(board);
@@ -299,7 +313,7 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value="게시글의 사진 파일들 출력", response=List.class)
-	@GetMapping("getFiles/boardId")
+	@GetMapping("getFiles/{boardId}")
 	public ResponseEntity<List<byte[]>> getFiles(@PathVariable int boardId) throws Exception {
 		try {
 			List<FileVO> fileList = boardService.getFiles(boardId);

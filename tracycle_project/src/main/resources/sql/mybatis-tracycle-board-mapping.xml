@@ -48,7 +48,7 @@
 	</sql>
 
 
- 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="false" keyProperty="board_id">
+ 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="true" keyProperty="boardId">
 		INSERT 
 		INTO board
 		(title, content, date, picture, view_count, status, user_id, area_id, category_id)
@@ -172,6 +172,7 @@
 		SELECT area_id, area_name, url, telephone 
 		FROM area
 	</select>
+	
 	
 	<select id="getAllCategory" parameterType="categoryVO" resultMap="categoryRM">
 		SELECT category_id, category_name
