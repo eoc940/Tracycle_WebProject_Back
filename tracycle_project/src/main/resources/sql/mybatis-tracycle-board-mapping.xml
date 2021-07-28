@@ -16,6 +16,8 @@
 	<resultMap type="areaVO" id="areaRM">
 		<id property="areaId" column="area_id"/>
 			<result property="areaName" column="area_name"/>
+			<result property="url" column="url"/>
+			<result property="telephone" column="telephone"/>			
 	</resultMap>
 	
 	<resultMap type="categoryVO" id="categoryRM">
@@ -28,6 +30,7 @@
 			<result property="title" column="title"/>
 			<result property="content" column="content"/>
 			<result property="date" column="date"/>
+			<result property="status" column="status"/>
 			<result property="viewCount" column="view_count"/>
 			<result property="picture" column="picture"/>
 		<collection property="user" resultMap="userRM" />
@@ -41,11 +44,11 @@
 	SELECT 
 	b.board_id board_id, b.title title, b.content content, b.date date, b.view_count view_count, b.picture picture,
 	b.status status, b.user_id user_id,u.password password, u.nickname nickname, u.address address,
-	b.area_id area_id, a.area_name area_name, b.category_id category_id, c.category_name category_name
+	b.area_id area_id, a.area_name area_name, a.url url, a.telephone telephone, b.category_id category_id, c.category_name category_name
 	</sql>
 
 
- 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="false" keyProperty="board_id">
+ 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="true" keyProperty="boardId">
 		INSERT 
 		INTO board
 		(title, content, date, picture, view_count, status, user_id, area_id, category_id)
@@ -164,6 +167,17 @@
 		WHERE board_id = #{value}
 		ORDER BY board_id DESC
 	</select>	
+	
+	<select id="getAllArea" parameterType="areaVO" resultMap="areaRM">
+		SELECT area_id, area_name, url, telephone 
+		FROM area
+	</select>
+	
+	
+	<select id="getAllCategory" parameterType="categoryVO" resultMap="categoryRM">
+		SELECT category_id, category_name
+		FROM category
+	</select>
 	
 				
 </mapper>

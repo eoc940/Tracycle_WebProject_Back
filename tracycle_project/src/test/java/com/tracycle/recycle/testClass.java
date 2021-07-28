@@ -4,7 +4,7 @@ package com.tracycle.recycle;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.put;
 
 import java.io.Reader;
-
+import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
 
@@ -234,8 +234,8 @@ public class testClass {
 		
 		//4. getAllComment
 		
-		List<CommentVO> list = session.selectList("CommentMapper.getAllComment", 5);
-		System.out.println(list);
+//		List<CommentVO> list = session.selectList("CommentMapper.getAllComment", 5);
+//		System.out.println(list);
 		
 		//5. findCommentById
 		
@@ -255,7 +255,8 @@ public class testClass {
 //		map.put("categoryId", 1);
 //		ResultVO result = session.selectOne("ResultMapper.getResult", map);
 //		System.out.println(result);
-
+		
+		
 		
 	}
 }

@@ -5,33 +5,27 @@ public class ResultVO {
 	private int price;
 	private String standard;
 	private String description;
-	private String url;
-	private String telephone;
+	
 	
 	private CategoryVO category;
 	private AreaVO area;
 	
 	public ResultVO() { }
 
-	public ResultVO(int resultId, int price, String standard, String description, String url, String telephone) {
+	public ResultVO(int resultId, int price, String standard, String description) {
 		super();
 		this.resultId = resultId;
 		this.price = price;
 		this.standard = standard;
 		this.description = description;
-		this.url = url;
-		this.telephone = telephone;
 	}
 
-	public ResultVO(int resultId, int price, String standard, String description, String url, String telephone,
-			CategoryVO category, AreaVO area) {
+	public ResultVO(int resultId, int price, String standard, String description, CategoryVO category, AreaVO area) {
 		super();
 		this.resultId = resultId;
 		this.price = price;
 		this.standard = standard;
 		this.description = description;
-		this.url = url;
-		this.telephone = telephone;
 		this.category = category;
 		this.area = area;
 	}
@@ -68,22 +62,6 @@ public class ResultVO {
 		this.description = description;
 	}
 
-	public String getUrl() {
-		return url;
-	}
-
-	public void setUrl(String url) {
-		this.url = url;
-	}
-
-	public String getTelephone() {
-		return telephone;
-	}
-
-	public void setTelephone(String telephone) {
-		this.telephone = telephone;
-	}
-
 	public CategoryVO getCategory() {
 		return category;
 	}
@@ -103,9 +81,9 @@ public class ResultVO {
 	@Override
 	public String toString() {
 		return "ResultVO [resultId=" + resultId + ", price=" + price + ", standard=" + standard + ", description="
-				+ description + ", url=" + url + ", telephone=" + telephone + ", category=" + category + ", area="
-				+ area + "]";
+				+ description + ", category=" + category + ", area=" + area + "]";
 	}
+
 	
 	
 	
