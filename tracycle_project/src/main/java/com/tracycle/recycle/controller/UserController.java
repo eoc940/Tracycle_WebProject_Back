@@ -51,10 +51,13 @@ public class UserController {
 	public ResponseEntity<UserVO> login(@RequestParam String userId, @RequestParam String password,
 			HttpSession session) throws Exception {
 		try {
+			System.out.println(userId + password);
 			UserVO user = new UserVO();
 			user.setUserId(userId);
 			user.setPassword(password);
 			UserVO loginUser = userService.login(user, session);
+			System.out.println(loginUser);
+			session.setAttribute("loginUser", loginUser);
 			if (loginUser != null) 
 				return new ResponseEntity<UserVO>(loginUser, HttpStatus.OK);
 			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT); 
