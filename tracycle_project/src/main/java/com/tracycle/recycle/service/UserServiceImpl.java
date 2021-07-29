@@ -20,9 +20,14 @@ public class UserServiceImpl implements UserService {
 	}
 
 	@Override
-	public UserVO login(UserVO user, HttpSession session) throws Exception {
-		session.setAttribute("user", user);
+	public UserVO login(UserVO user) throws Exception {
+		
 		return userDao.login(user);
+	}
+	
+	@Override
+	public String getServerInfo() throws Exception {
+		return "made by hgk";
 	}
 	
 	@Override
@@ -53,6 +58,8 @@ public class UserServiceImpl implements UserService {
 	public boolean deleteUser(String userId) throws Exception {
 		return userDao.deleteUser(userId);
 	}
+
+	
 
 	
 	
