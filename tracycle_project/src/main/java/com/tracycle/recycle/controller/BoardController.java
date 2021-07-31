@@ -9,6 +9,8 @@ import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
 import java.util.List;
 
+import javax.servlet.http.HttpServletRequest;
+
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -194,8 +196,9 @@ public class BoardController {
 	
 	@ApiOperation(value="모든 게시물을 출력한다", response=List.class)
 	@GetMapping("getAllBoard")
-	public ResponseEntity<List<BoardVO>> getAllBoard() throws Exception {
+	public ResponseEntity<List<BoardVO>> getAllBoard(HttpServletRequest request) throws Exception {
 		try {
+			System.out.println("게시글리스트 인증 토큰 : " + request.getHeader("jwt-auth-token"));
 			List<BoardVO> boardList = boardService.getAllBoard();
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
 		}catch(RuntimeException e) {
