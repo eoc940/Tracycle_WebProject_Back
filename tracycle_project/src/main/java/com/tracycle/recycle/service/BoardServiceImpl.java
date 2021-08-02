@@ -102,6 +102,11 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getAllCategory();
 	}
 
+	@Override
+	public FileVO getMainFile(String fileName) throws Exception {
+		return boardDao.getMainFile(fileName);
+	}
+
 	
 
 }
