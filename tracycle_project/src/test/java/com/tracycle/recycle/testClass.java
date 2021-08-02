@@ -72,7 +72,7 @@ public class testClass {
 		//4. deleteUser Test...
 		
 //		UserVO user = new UserVO();
-//		user.setUserId("4321");
+//		user.setUserId("stressProject");
 //		session.delete("UserMapper.deleteUser", user);
 //		session.commit();
 		
@@ -239,8 +239,8 @@ public class testClass {
 		
 		//5. findCommentById
 		
-		List<CommentVO> list = session.selectList("CommentMapper.findCommentById", "silver23");
-		System.out.println(list);
+//		List<CommentVO> list = session.selectList("CommentMapper.findCommentById", "silver23");
+//		System.out.println(list);
 		
 
 // ===============================================================================================
