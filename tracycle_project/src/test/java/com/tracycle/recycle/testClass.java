@@ -239,8 +239,8 @@ public class testClass {
 		
 		//5. findCommentById
 		
-//		List<CommentVO> list = session.selectList("CommentMapper.findCommentById", "23Corss");
-//		System.out.println(list);
+		List<CommentVO> list = session.selectList("CommentMapper.findCommentById", "silver23");
+		System.out.println(list);
 		
 
 // ===============================================================================================
