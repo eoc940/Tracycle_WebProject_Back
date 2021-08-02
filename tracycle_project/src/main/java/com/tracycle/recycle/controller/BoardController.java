@@ -232,7 +232,7 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value="내용으로 게시물을 검색한다", response=List.class)
-	@GetMapping("findById/{content}")
+	@GetMapping("findByContent/{content}")
 	public ResponseEntity<List<BoardVO>> findByContent(@PathVariable String content) throws Exception {
 		try {
 			List<BoardVO> boardList = boardService.findByContent(content);

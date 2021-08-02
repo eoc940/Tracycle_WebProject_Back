@@ -24,7 +24,12 @@ public class TracycleProjectApplication implements WebMvcConfigurer{
 	@Override
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
-		.excludePathPatterns(Arrays.asList("/user/**"));
+		.excludePathPatterns(Arrays.asList("/comment/getAllComment/**"))
+		.excludePathPatterns(Arrays.asList("/board/**"))
+		.excludePathPatterns(Arrays.asList("/user/**"))
+		.addPathPatterns("/board/writeBoard")
+		.addPathPatterns("/board/updateBoard")
+		.addPathPatterns("/board/deleteBoard/**");
 	}
 
 	@Override
