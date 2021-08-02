@@ -109,6 +109,11 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectList(ns + "getAllCategory");
 	}
 
+	@Override
+	public FileVO getMainFile(String fileName) throws Exception {
+		return sqlSession.selectOne(ns + "getMainFile", fileName);
+	}
+
 	
 
 }

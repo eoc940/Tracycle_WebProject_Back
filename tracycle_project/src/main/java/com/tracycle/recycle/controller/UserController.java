@@ -65,14 +65,15 @@ public class UserController {
 		HttpStatus status = null;
 		try {
 			UserVO loginUser = userService.login(user);
-			System.out.println(user);
-//			if(user.getNickName() != null) {
+			System.out.println(loginUser);
+			System.out.println(loginUser.getNickName());
+			if(loginUser.getNickName() != null) {
 				//로그인 성공하면 토큰을 생성
 				String token = jwtService.create(loginUser);
 				//토큰 정보는 request의 헤더로 보내고 나머지는 Map에 담아주자
 				response.setHeader("jwt-auth-token", token);
 				// resultMap.put("auth_token", token);
-//			}
+			}
 			resultMap.put("status", true);
 			resultMap.put("data", loginUser);
 			status = HttpStatus.ACCEPTED;
