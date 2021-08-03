@@ -1,11 +1,8 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-
-
-
+	
 <mapper namespace="BoardMapper">
-
 	<resultMap type="userVO" id="userRM">
 		<id property="userId" column="user_id" />
 		<result property="password" column="password" />
@@ -94,7 +91,19 @@
 		#{category.categoryId}
 		WHERE board_id = #{boardId}
 	</update>
-
+	
+	<update id="updateBoardOnlyText" parameterType="boardVO">
+		UPDATE board
+		SET
+		title = #{title},
+		content = #{content},
+		date= #{date},
+		status = #{status},
+		area_id = #{area.areaId},
+		category_id = #{category.categoryId}
+		WHERE board_id = #{boardId}
+	</update>
+	
 	<delete id="deleteBoard" parameterType="int">
 		DELETE
 		FROM board
@@ -187,8 +196,7 @@
 	<delete id="deleteFiles" parameterType="int">
 		DELETE
 		FROM file
-		WHERE
-		board_id=#{value}s
+		WHERE board_id=#{value}
 	</delete>
 
 
@@ -203,6 +211,14 @@
 	</select>
 
 	<select id="getFiles" parameterType="int" resultType="fileVO">
+		SELECT	
+		board_id, original_filename, filename, filepath
+		FROM file
+		WHERE board_id = #{value}
+		ORDER BY file_id 
+	</select>	
+	
+	<select id="getMainFile" parameterType="string" resultType="fileVO">
 		SELECT
 		board_id, original_filename, filename, filepath
 		FROM file
@@ -249,5 +265,6 @@
 		c.category_id
 		ORDER BY b.board_id DESC LIMIT 6 OFFSET #{offset}
 	</select>
-
+	
+	
 </mapper>

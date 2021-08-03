@@ -26,6 +26,11 @@ public class BoardServiceImpl implements BoardService {
 	public boolean updateBoard(BoardVO board) throws Exception {
 		return boardDao.updateBoard(board);
 	}
+	
+	@Override
+	public boolean updateBoardOnlyText(BoardVO board) throws Exception {
+		return boardDao.updateBoardOnlyText(board);
+	}
 
 	@Override
 	public boolean deleteBoard(int boardId) throws Exception {
@@ -116,6 +121,8 @@ public class BoardServiceImpl implements BoardService {
 	public int getBoardTotalCount() {
 		return boardDao.getBoardTotalCount();
 	}
+
+	
 
 	
 

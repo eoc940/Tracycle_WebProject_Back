@@ -123,12 +123,38 @@ public class BoardController {
 		} 
 	}
 	
+	@ApiOperation(value="게시글을 수정한다(사진 수정 안함)", response=BoardVO.class)
+	@PutMapping("updateBoardOnlyText")
+	public ResponseEntity<BoardVO> updateBoardOnlyText(
+			@RequestBody BoardVO board) throws Exception{
+		try {
+			System.out.println("글만 수정하는 board 객체 : " + board);
+			boardService.updateBoardOnlyText(board);
+			return new ResponseEntity<BoardVO>(HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	@ApiOperation(value="게시글을 수정한다", response=BoardVO.class)
 	@PutMapping("updateBoard")
-	public ResponseEntity<BoardVO> updateBoard(@RequestBody BoardVO board,
+	public ResponseEntity<BoardVO> updateBoard(BoardVO board,
+			@RequestParam("userId") String userId,
+			@RequestParam("areaId") int areaId,
+			@RequestParam("categoryId") int categoryId,
 			@RequestParam("mainFile") MultipartFile mainFile, 
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		try {
+			System.out.println(board);
+			System.out.println(userId + areaId + categoryId);
+			board.setUser(new UserVO(userId));
+			board.setArea(new AreaVO(areaId));
+			board.setCategory(new CategoryVO(categoryId));
+			System.out.println(board);
+			System.out.println(mainFile);
+			System.out.println(files);
+			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
 			String savePath = System.getProperty("user.dir") + "/files";
@@ -140,6 +166,63 @@ public class BoardController {
 				}
 			}
 			String filePath = savePath + "/" + mainFileName;
+			mainFile.transferTo(new File(filePath));
+			board.setPicture(mainFileName);
+			boardService.updateBoard(board);
+			System.out.println("!@#@!"+board);
+			
+			boardService.deleteFiles(board.getBoardId());
+			
+			//mFile mainFile
+			FileVO mFile = new FileVO();
+			mFile.setBoard(board);
+			mFile.setFileName(mainFileName);
+			mFile.setFilePath(filePath);
+			mFile.setOriginalFileName(origMainFileName);
+			boardService.addFile(mFile);
+			
+			for(MultipartFile file : files) {
+				String origFileName = file.getOriginalFilename();
+				String fileName = new MD5Generator(origFileName).toString();
+				String path = System.getProperty("user.dir") +"\\files";
+				if (!new File(path).exists()) {
+					try {
+						new File(path).mkdir();
+					}catch(Exception e) {
+						e.printStackTrace();
+					}
+				}
+				filePath = path + "\\" + fileName;
+				file.transferTo(new File(filePath));
+				//sFile subFile
+				FileVO sFile = new FileVO();
+				sFile.setBoard(board);
+				sFile.setOriginalFileName(origFileName);
+				sFile.setFileName(fileName);
+				sFile.setFilePath(filePath);
+				boardService.addFile(sFile);
+			}
+			return new ResponseEntity<BoardVO>(HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
+		}
+		
+	}
+	
+	/*
+	 * 
+	 * String origMainFileName = mainFile.getOriginalFilename();
+			String mainFileName = new MD5Generator(origMainFileName).toString();
+			String savePath = System.getProperty("user.dir") + "\\files";
+			if(!new File(savePath).exists()) {
+				try {
+					new File(savePath).mkdir();
+				}catch(Exception e) {
+					e.printStackTrace();
+				}
+			}
+			String filePath = savePath + "\\" + mainFileName;
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(origMainFileName);
 			boolean isUpdated = boardService.updateBoard(board);
@@ -175,12 +258,7 @@ public class BoardController {
 				boardService.addFile(sFile);
 			}
 			return new ResponseEntity<BoardVO>(HttpStatus.OK);
-		}catch(RuntimeException e) {
-			e.printStackTrace();
-			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
-		}
-	}
-	
+	 */
 	 
 	@ApiOperation(value="게시글을 삭제한다", response=BoardVO.class)
 	@DeleteMapping("deleteBoard/{boardId}")
