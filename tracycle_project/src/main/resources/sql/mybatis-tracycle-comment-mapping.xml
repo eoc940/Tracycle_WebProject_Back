@@ -25,6 +25,7 @@
 	
 	<resultMap type="boardVO" id="boardRM">
 		<id property="boardId" column="board_id"/>
+			<result property="title" column="title"/>
 	</resultMap>
 	
 	<resultMap type="commentVO" id="commentRM">
