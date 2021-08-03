@@ -25,6 +25,7 @@
 	
 	<resultMap type="boardVO" id="boardRM">
 		<id property="boardId" column="board_id"/>
+			<result property="title" column="title"/>
 	</resultMap>
 	
 	<resultMap type="commentVO" id="commentRM">
@@ -39,7 +40,7 @@
 	<sql id="select-comment">
 	SELECT 
 	c.comment_id comment_id, c.date date, c.content content, c.secret secret, 
-	c.user_id user_id, c.board_id board_id
+	c.user_id user_id, c.board_id board_id, b.title
 	</sql>
 	
 	<insert id="writeComment" parameterType="commentVO">
