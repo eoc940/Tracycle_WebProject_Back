@@ -14,6 +14,7 @@ import javax.servlet.http.HttpServletRequest;
 import org.apache.commons.io.IOUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
+import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.DeleteMapping;
@@ -207,6 +208,39 @@ public class BoardController {
 		}
 	}
 	
+	@ApiOperation(value="메인 이미지을 출력한다", response=byte[].class)
+	@GetMapping("getFile/{picture}")
+	public ResponseEntity<byte[]> getFile(@PathVariable String picture) throws Exception {
+		try {
+			FileVO file = boardService.getMainFile(picture);
+			InputStream imageStream = new FileInputStream(file.getFilePath());
+			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
+			System.out.println(imageByteArray);
+			imageStream.close();
+			return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<byte[]>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="게시글의 사진 파일들 출력", response=List.class)
+	@GetMapping("getFiles/{boardId}")
+	public ResponseEntity<List<String>> getFiles(@PathVariable int boardId) throws Exception {
+		try {
+			List<FileVO> fileList = boardService.getFiles(boardId);
+			List<String> fileNameList = new ArrayList<String>();
+			for(FileVO file : fileList) {
+				fileNameList.add(file.getFileName());
+			}
+			System.out.println(fileNameList);
+			return new ResponseEntity<List<String>>(fileNameList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<String>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
 	@ApiOperation(value="제목으로 게시물을 검색한다", response=List.class)
 	@GetMapping("findByTitle/{title}")
 	public ResponseEntity<List<BoardVO>> findByTitle(@PathVariable String title) throws Exception {
@@ -315,23 +349,7 @@ public class BoardController {
 		}
 	}
 	
-	@ApiOperation(value="게시글의 사진 파일들 출력", response=List.class)
-	@GetMapping("getFiles/{boardId}")
-	public ResponseEntity<List<byte[]>> getFiles(@PathVariable int boardId) throws Exception {
-		try {
-			List<FileVO> fileList = boardService.getFiles(boardId);
-			List<byte[]> imageList = new ArrayList<byte[]>();
-			for(FileVO file : fileList) {
-				InputStream in = getClass().getResourceAsStream(file.getFilePath());
-				byte[] byteArray = IOUtils.toByteArray(in);
-				imageList.add(byteArray);
-			}
-			return new ResponseEntity<List<byte[]>>(imageList, HttpStatus.OK);
-		}catch(RuntimeException e) {
-			e.printStackTrace();
-			return new ResponseEntity<List<byte[]>>(HttpStatus.NO_CONTENT);
-		}
-	}
+	
 	
 	@ApiOperation(value="전체 지역 출력", response=List.class)
 	@GetMapping("getAllArea")

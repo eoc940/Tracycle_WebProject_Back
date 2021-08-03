@@ -25,6 +25,7 @@ public interface BoardService {
 	void deleteFiles(int boardId) throws Exception;
 	BoardVO getBoard(int boardId) throws Exception;
 	List<FileVO> getFiles(int boardId) throws Exception;
+	FileVO getMainFile(String fileName) throws Exception;
 	List<AreaVO> getAllArea() throws Exception;
 	List<CategoryVO> getAllCategory() throws Exception;
 

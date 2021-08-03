@@ -1,5 +1,6 @@
 package com.tracycle.recycle.domain;
 
+import java.util.Arrays;
 import java.util.List;
 
 
@@ -11,7 +12,8 @@ public class BoardVO {
 	private int viewCount;
 	private String picture;
 	private int status;
-	
+	private byte[] image;
+
 	private UserVO user;
 	private AreaVO area;
 	private CategoryVO category;
@@ -49,6 +51,14 @@ public class BoardVO {
 		this.user = user;
 		this.area = area;
 		this.category = category;
+	}
+	
+	public byte[] getImage() {
+		return image;
+	}
+
+	public void setImage(byte[] image) {
+		this.image = image;
 	}
 
 
@@ -157,9 +167,13 @@ public class BoardVO {
 	@Override
 	public String toString() {
 		return "BoardVO [boardId=" + boardId + ", title=" + title + ", content=" + content + ", date=" + date
-				+ ", viewCount=" + viewCount + ", status=" + status + ", user=" + user + ", area=" + area
-				+ ", category=" + category + ", picture=" + picture + "]";
+				+ ", viewCount=" + viewCount + ", picture=" + picture + ", status=" + status + ", image="
+				+ Arrays.toString(image) + ", user=" + user + ", area=" + area + ", category=" + category + "]";
 	}
+
+
+
+	
 	
 	
 	

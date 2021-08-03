@@ -168,6 +168,14 @@
 		ORDER BY board_id DESC
 	</select>	
 	
+	<select id="getMainFile" parameterType="string" resultType="fileVO">
+		SELECT
+		board_id, original_filename, filename, filepath
+		FROM file
+		WHERE filename = #{value}
+		ORDER BY board_id DESC limit 1
+	</select>
+	
 	<select id="getAllArea" parameterType="areaVO" resultMap="areaRM">
 		SELECT area_id, area_name, url, telephone 
 		FROM area
