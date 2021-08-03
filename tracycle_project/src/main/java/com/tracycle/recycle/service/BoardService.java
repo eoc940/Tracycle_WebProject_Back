@@ -11,6 +11,7 @@ public interface BoardService {
 	
 	void writeBoard(BoardVO board) throws Exception;
 	boolean updateBoard(BoardVO board) throws Exception;
+	boolean updateBoardOnlyText(BoardVO board) throws Exception;
 	boolean deleteBoard(int boardId) throws Exception;
 	List<BoardVO> getAllBoard() throws Exception;
 	List<BoardVO> findByTitle(String title) throws Exception;

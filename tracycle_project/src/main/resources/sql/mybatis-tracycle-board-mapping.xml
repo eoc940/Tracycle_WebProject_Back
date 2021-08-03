@@ -77,6 +77,18 @@
 		WHERE board_id = #{boardId}
 	</update>
 	
+	<update id="updateBoardOnlyText" parameterType="boardVO">
+		UPDATE board
+		SET
+		title = #{title},
+		content = #{content},
+		date= #{date},
+		status = #{status},
+		area_id = #{area.areaId},
+		category_id = #{category.categoryId}
+		WHERE board_id = #{boardId}
+	</update>
+	
 	<delete id="deleteBoard" parameterType="int">
 		DELETE
 		FROM board
@@ -148,7 +160,7 @@
 	<delete id="deleteFiles" parameterType="int">
 		DELETE
 		FROM file
-		WHERE board_id=#{value}s
+		WHERE board_id=#{value}
 	</delete>
 	
 	
@@ -165,7 +177,7 @@
 		board_id, original_filename, filename, filepath
 		FROM file
 		WHERE board_id = #{value}
-		ORDER BY board_id DESC
+		ORDER BY file_id 
 	</select>	
 	
 	<select id="getMainFile" parameterType="string" resultType="fileVO">
