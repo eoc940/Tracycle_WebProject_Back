@@ -73,7 +73,7 @@ public class BoardController {
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
-			String savePath = System.getProperty("user.dir") + "\\files";
+			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
 				try {
 					new File(savePath).mkdir();
@@ -81,7 +81,7 @@ public class BoardController {
 					e.printStackTrace();
 				}
 			}
-			String filePath = savePath + "\\" + mainFileName;
+			String filePath = savePath + "/" + mainFileName;
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
@@ -97,7 +97,7 @@ public class BoardController {
 			for(MultipartFile file : files) {
 				String origFileName = file.getOriginalFilename();
 				String fileName = new MD5Generator(origFileName).toString();
-				String path = System.getProperty("user.dir") +"\\files";
+				String path = System.getProperty("user.dir") +"/files";
 				if (!new File(path).exists()) {
 					try {
 						new File(path).mkdir();
@@ -105,7 +105,7 @@ public class BoardController {
 						e.printStackTrace();
 					}
 				}
-				filePath = path + "\\" + fileName;
+				filePath = path + "/" + fileName;
 				file.transferTo(new File(filePath));
 				//sFile subFile
 				FileVO sFile = new FileVO();
@@ -130,7 +130,7 @@ public class BoardController {
 		try {
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
-			String savePath = System.getProperty("user.dir") + "\\files";
+			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
 				try {
 					new File(savePath).mkdir();
@@ -138,7 +138,7 @@ public class BoardController {
 					e.printStackTrace();
 				}
 			}
-			String filePath = savePath + "\\" + mainFileName;
+			String filePath = savePath + "/" + mainFileName;
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(origMainFileName);
 			boolean isUpdated = boardService.updateBoard(board);
@@ -155,7 +155,7 @@ public class BoardController {
 			for(MultipartFile file : files) {
 				String origFileName = file.getOriginalFilename();
 				String fileName = new MD5Generator(origFileName).toString();
-				String path = System.getProperty("user.dir") +"\\files";
+				String path = System.getProperty("user.dir") +"/files";
 				if (!new File(path).exists()) {
 					try {
 						new File(path).mkdir();
@@ -163,7 +163,7 @@ public class BoardController {
 						e.printStackTrace();
 					}
 				}
-				filePath = path + "\\" + fileName;
+				filePath = path + "/" + fileName;
 				file.transferTo(new File(filePath));
 				//sFile subFile
 				FileVO sFile = new FileVO();
