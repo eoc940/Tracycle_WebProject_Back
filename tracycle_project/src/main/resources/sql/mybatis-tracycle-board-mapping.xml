@@ -1,94 +1,79 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
 	"http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-	
+
+
+
 <mapper namespace="BoardMapper">
+	
 	<resultMap type="userVO" id="userRM">
-		<id property="userId" column="user_id" />
-		<result property="password" column="password" />
-		<result property="nickName" column="nickname" />
-		<result property="address" column="address" />
+		<id property="userId" column="user_id"/>
+			<result property="password" column="password"/>
+			<result property="nickName" column="nickname"/>
+			<result property="address" column="address"/>
 	</resultMap>
-
+	
 	<resultMap type="areaVO" id="areaRM">
-		<id property="areaId" column="area_id" />
-		<result property="areaName" column="area_name" />
-		<result property="url" column="url" />
-		<result property="telephone" column="telephone" />
+		<id property="areaId" column="area_id"/>
+			<result property="areaName" column="area_name"/>
+			<result property="url" column="url"/>
+			<result property="telephone" column="telephone"/>			
 	</resultMap>
-
+	
 	<resultMap type="categoryVO" id="categoryRM">
-		<id property="categoryId" column="category_id" />
-		<result property="categoryName" column="category_name" />
+		<id property="categoryId" column="category_id"/>
+			<result property="categoryName" column="category_name"/>
 	</resultMap>
-
+	
 	<resultMap type="boardVO" id="boardRM">
-		<id property="boardId" column="board_id" />
-		<result property="title" column="title" />
-		<result property="content" column="content" />
-		<result property="date" column="date" />
-		<result property="status" column="status" />
-		<result property="viewCount" column="view_count" />
-		<result property="picture" column="picture" />
+		<id property="boardId" column="board_id"/>
+			<result property="title" column="title"/>
+			<result property="content" column="content"/>
+			<result property="date" column="date"/>
+			<result property="status" column="status"/>
+			<result property="viewCount" column="view_count"/>
+			<result property="picture" column="picture"/>
 		<collection property="user" resultMap="userRM" />
 		<collection property="area" resultMap="areaRM" />
 		<collection property="category" resultMap="categoryRM" />
 	</resultMap>
+	
 
-
-
+	
 	<sql id="select-board">
-		SELECT
-		b.board_id board_id, b.title title, b.content
-		content, b.date date, b.view_count
-		view_count, b.picture picture,
-		b.status status, b.user_id user_id,u.password password, u.nickname
-		nickname,
-		u.address address,
-		b.area_id area_id, a.area_name area_name,
-		a.url url, a.telephone telephone,
-		b.category_id category_id,
-		c.category_name category_name
+	SELECT 
+	b.board_id board_id, b.title title, b.content content, b.date date, b.view_count view_count, b.picture picture,
+	b.status status, b.user_id user_id,u.password password, u.nickname nickname, u.address address,
+	b.area_id area_id, a.area_name area_name, a.url url, a.telephone telephone, b.category_id category_id, c.category_name category_name
 	</sql>
 
 
-	<insert id="writeBoard" parameterType="boardVO"
-		useGeneratedKeys="true" keyProperty="boardId">
-		INSERT
+ 	<insert id="writeBoard" parameterType="boardVO" useGeneratedKeys="true" keyProperty="boardId">
+		INSERT 
 		INTO board
-		(title, content,
-		date, picture, view_count, status, user_id,
-		area_id, category_id)
+		(title, content, date, picture, view_count, status, user_id, area_id, category_id)
 		VALUES
-		(#{title}, #{content}, #{date}, #{picture},
-		#{viewCount},
-		#{status}, #{user.userId}, #{area.areaId},
-		#{category.categoryId})
+		(#{title}, #{content}, #{date}, #{picture}, #{viewCount}, #{status}, #{user.userId}, #{area.areaId}, #{category.categoryId})
 	</insert>
 
-	<select id="getAllBoard" parameterType="boardVO"
-		resultMap="boardRM">
+	<select id="getAllBoard" parameterType="boardVO" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		ORDER BY b.board_id DESC;
 	</select>
-
+	
 	<update id="updateBoard" parameterType="boardVO">
 		UPDATE board
 		SET
-		title =
-		#{title},
+		title = #{title},
 		content = #{content},
 		date= #{date},
 		picture = #{picture},
 		status = #{status},
 		area_id = #{area.areaId},
-		category_id =
-		#{category.categoryId}
+		category_id = #{category.categoryId}
 		WHERE board_id = #{boardId}
 	</update>
 	
@@ -107,109 +92,86 @@
 	<delete id="deleteBoard" parameterType="int">
 		DELETE
 		FROM board
-		WHERE
-		board_id = #{boardId}
+		WHERE board_id = #{boardId} 
 	</delete>
-
-	<select id="findByTitle" parameterType="string"
-		resultMap="boardRM">
+	
+	<select id="findByTitle" parameterType="string" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE title LIKE CONCAT('%',#{value},'%')
-		ORDER BY
-		b.board_id DESC;
+		ORDER BY b.board_id DESC;
 	</select>
-
+	
 
 	<select id="findById" parameterType="string" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE b.user_id LIKE CONCAT('%',#{value},'%')
-		ORDER BY
-		b.board_id DESC;
+		ORDER BY b.board_id DESC;
 	</select>
 
-	<select id="findByContent" parameterType="string"
-		resultMap="boardRM">
+	<select id="findByContent" parameterType="string" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE content LIKE CONCAT('%',#{value},'%')
-		ORDER BY
-		b.board_id DESC;
-	</select>
+		ORDER BY b.board_id DESC;
+	</select>		
 
-	<select id="findByArea" parameterType="boardVO"
-		resultMap="boardRM">
+	<select id="findByArea" parameterType="boardVO" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE b.area_id = #{value}
 		ORDER BY b.board_id DESC;
 	</select>
 
-	<select id="findByCategory" parameterType="boardVO"
-		resultMap="boardRM">
+	<select id="findByCategory" parameterType="boardVO" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE b.category_id = #{value}
 		ORDER BY b.board_id DESC;
-	</select>
-
+	</select>	
+	
 
 	<update id="addViewCount" parameterType="int">
 		UPDATE board
-		SET
-		view_count = view_count+1
+		SET view_count = view_count+1 
 		WHERE board_id = #{value}
 	</update>
-
-
+	
+	
 	<insert id="addFile" parameterType="fileVO">
 		INSERT
 		INTO file
-		(board_id,
-		original_filename, filename, filepath)
+		(board_id, original_filename, filename, filepath)
 		VALUES
-		(#{board.boardId},
-		#{originalFileName}, #{fileName}, #{filePath})
+		(#{board.boardId}, #{originalFileName}, #{fileName}, #{filePath})
 	</insert>
-
+	
 	<delete id="deleteFiles" parameterType="int">
 		DELETE
 		FROM file
 		WHERE board_id=#{value}
 	</delete>
-
-
+	
+	
 	<select id="getBoard" parameterType="int" resultMap="boardRM">
 		<include refid="select-board" />
-		FROM board b LEFT JOIN user u on b.user_id = u.user_id
-		JOIN area a on
-		b.area_id = a.area_id
-		JOIN category c on b.category_id =
-		c.category_id
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
 		WHERE board_id = #{value}
-	</select>
-
+	</select> 
+	
 	<select id="getFiles" parameterType="int" resultType="fileVO">
 		SELECT	
 		board_id, original_filename, filename, filepath
@@ -222,34 +184,21 @@
 		SELECT
 		board_id, original_filename, filename, filepath
 		FROM file
-		WHERE board_id
-		= #{value}
-		ORDER BY board_id DESC
-	</select>
-
-	<select id="getMainFile" parameterType="string"
-		resultType="fileVO">
-		SELECT
-		board_id, original_filename, filename, filepath
-		FROM
-		file
 		WHERE filename = #{value}
 		ORDER BY board_id DESC limit 1
 	</select>
-
-	<select id="getAllArea" parameterType="areaVO"
-		resultMap="areaRM">
-		SELECT area_id, area_name, url, telephone
+	
+	<select id="getAllArea" parameterType="areaVO" resultMap="areaRM">
+		SELECT area_id, area_name, url, telephone 
 		FROM area
 	</select>
-
-
-	<select id="getAllCategory" parameterType="categoryVO"
-		resultMap="categoryRM">
+	
+	
+	<select id="getAllCategory" parameterType="categoryVO" resultMap="categoryRM">
 		SELECT category_id, category_name
 		FROM category
 	</select>
-
+	
 	<select id="getBoardTotalCount" resultType="int">
 		select count(*) from
 		board
@@ -265,6 +214,5 @@
 		c.category_id
 		ORDER BY b.board_id DESC LIMIT 6 OFFSET #{offset}
 	</select>
-	
-	
+				
 </mapper>
