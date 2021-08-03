@@ -375,7 +375,29 @@ public class BoardController {
 		}
 	}
 	
+	@ApiOperation(value="전체 게시글 수 출력", response=List.class)
+	@GetMapping("getBoardTotalCount")
+	public ResponseEntity<Integer> getBoardTotalCount() throws Exception {
+		try {
+			int totalCount = boardService.getBoardTotalCount();
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
 	
+	@ApiOperation(value="limit offset 에 해당하는 게시글 출력한다", response=List.class)
+	@GetMapping("getBoardLimitOffset/{offset}")
+	public ResponseEntity<List<BoardVO>> getBoardLimitOffset(@PathVariable int offset) throws Exception {
+		try {
+			List<BoardVO> boardList = boardService.getBoardLimitOffset(offset);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
 	
 	
 	

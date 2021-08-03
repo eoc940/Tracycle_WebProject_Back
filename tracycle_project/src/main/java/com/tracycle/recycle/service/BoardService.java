@@ -28,5 +28,7 @@ public interface BoardService {
 	FileVO getMainFile(String fileName) throws Exception;
 	List<AreaVO> getAllArea() throws Exception;
 	List<CategoryVO> getAllCategory() throws Exception;
-
+	//pagination
+	public List<BoardVO> getBoardLimitOffset(int offset);
+	public int getBoardTotalCount();
 }
