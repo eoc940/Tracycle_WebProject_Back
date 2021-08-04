@@ -393,6 +393,4 @@ public class BoardController {
 	
 	
 	
-	
-	
 }
