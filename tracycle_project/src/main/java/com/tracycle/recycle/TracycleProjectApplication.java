@@ -25,6 +25,8 @@ public class TracycleProjectApplication implements WebMvcConfigurer{
 	public void addInterceptors(InterceptorRegistry registry) {
 		registry.addInterceptor(jwtInterceptor).addPathPatterns("/**")
 		.excludePathPatterns(Arrays.asList("/comment/getAllComment/**"))
+		.excludePathPatterns(Arrays.asList("/comment/getCommentTotalCount/**"))
+		.excludePathPatterns(Arrays.asList("/comment/getCommentLimitOffset/**"))
 		.excludePathPatterns(Arrays.asList("/board/**"))
 		.excludePathPatterns(Arrays.asList("/user/**"))
 		.addPathPatterns("/board/writeBoard")

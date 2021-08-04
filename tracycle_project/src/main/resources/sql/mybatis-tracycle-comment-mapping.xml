@@ -84,4 +84,16 @@
 		ORDER BY c.comment_id DESC;
 	</select>
 	
+	<select id="getCommentTotalCount" parameterType="int" resultType="int">
+		select count(*)
+		FROM comment 
+		WHERE board_id = #{value}
+	</select>
+	
+	<select id="getCommentLimitOffset" parameterType="HashMap" resultMap="commentRM">
+	    <include refid="select-comment" />
+		FROM comment c
+		WHERE c.board_id = #{boardId}
+		ORDER BY c.comment_id DESC LIMIT 10 OFFSET #{offset};
+	</select>
 </mapper>
