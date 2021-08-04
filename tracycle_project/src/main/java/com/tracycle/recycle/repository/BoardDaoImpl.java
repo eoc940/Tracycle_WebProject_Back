@@ -121,6 +121,16 @@ public class BoardDaoImpl implements BoardDao {
 		return sqlSession.selectOne(ns + "getMainFile", fileName);
 	}
 
+	@Override
+	public List<BoardVO> getBoardLimitOffset(int offset) {
+		return sqlSession.selectList(ns + "getBoardLimitOffset",offset);
+	}
+
+	@Override
+	public int getBoardTotalCount() {
+		return sqlSession.selectOne(ns + "getBoardTotalCount");
+	}
+
 	
 
 	

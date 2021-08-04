@@ -199,5 +199,20 @@
 		FROM category
 	</select>
 	
+	<select id="getBoardTotalCount" resultType="int">
+		select count(*) from
+		board
+	</select>
+
+	<select id="getBoardLimitOffset" parameterType="int"
+		resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id
+		JOIN area a on
+		b.area_id = a.area_id
+		JOIN category c on b.category_id =
+		c.category_id
+		ORDER BY b.board_id DESC LIMIT 6 OFFSET #{offset}
+	</select>
 				
 </mapper>

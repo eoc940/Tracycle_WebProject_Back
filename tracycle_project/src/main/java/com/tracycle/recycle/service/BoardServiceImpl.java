@@ -112,6 +112,16 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getMainFile(fileName);
 	}
 
+	@Override
+	public List<BoardVO> getBoardLimitOffset(int offset) {
+		return boardDao.getBoardLimitOffset(offset);
+	}
+
+	@Override
+	public int getBoardTotalCount() {
+		return boardDao.getBoardTotalCount();
+	}
+
 	
 
 	
