@@ -74,7 +74,7 @@ public class BoardController {
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
-			String savePath = System.getProperty("user.dir") + "\\files";
+			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
 				try {
 					new File(savePath).mkdir();
@@ -82,7 +82,7 @@ public class BoardController {
 					e.printStackTrace();
 				}
 			}
-			String filePath = savePath + "\\" + mainFileName;
+			String filePath = savePath + "/" + mainFileName;
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
@@ -98,7 +98,7 @@ public class BoardController {
 			for(MultipartFile file : files) {
 				String origFileName = file.getOriginalFilename();
 				String fileName = new MD5Generator(origFileName).toString();
-				String path = System.getProperty("user.dir") +"\\files";
+				String path = System.getProperty("user.dir") +"/files";
 				if (!new File(path).exists()) {
 					try {
 						new File(path).mkdir();
@@ -106,7 +106,7 @@ public class BoardController {
 						e.printStackTrace();
 					}
 				}
-				filePath = path + "\\" + fileName;
+				filePath = path + "/" + fileName;
 				file.transferTo(new File(filePath));
 				//sFile subFile
 				FileVO sFile = new FileVO();
@@ -157,7 +157,7 @@ public class BoardController {
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
-			String savePath = System.getProperty("user.dir") + "\\files";
+			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
 				try {
 					new File(savePath).mkdir();
@@ -165,7 +165,7 @@ public class BoardController {
 					e.printStackTrace();
 				}
 			}
-			String filePath = savePath + "\\" + mainFileName;
+			String filePath = savePath + "/" + mainFileName;
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.updateBoard(board);
@@ -210,7 +210,7 @@ public class BoardController {
 		
 	}
 	
-	
+
 	 
 	@ApiOperation(value="게시글을 삭제한다", response=BoardVO.class)
 	@DeleteMapping("deleteBoard/{boardId}")
@@ -356,11 +356,15 @@ public class BoardController {
 	}
 	
 	@ApiOperation(value="게시글 상세정보", response=BoardVO.class)
-	@GetMapping("getBoard/{boardId}")
-	public ResponseEntity<BoardVO> getBoard(@PathVariable int boardId) throws Exception {
+	@GetMapping("getBoard/{boardId}/{isAddViewCount}")
+	public ResponseEntity<BoardVO> getBoard(@PathVariable int boardId,
+			@PathVariable String isAddViewCount) throws Exception {
 		
 		try {
-			
+			System.out.println(isAddViewCount);
+			if(isAddViewCount.equals("add")){
+				boardService.addViewCount(boardId);
+			}
 			BoardVO board = boardService.getBoard(boardId);
 			return new ResponseEntity<BoardVO>(board, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -407,7 +411,29 @@ public class BoardController {
 		}
 	}
 	
+	@ApiOperation(value="전체 게시글 수 출력", response=List.class)
+	@GetMapping("getBoardTotalCount")
+	public ResponseEntity<Integer> getBoardTotalCount() throws Exception {
+		try {
+			int totalCount = boardService.getBoardTotalCount();
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
 	
+	@ApiOperation(value="limit offset 에 해당하는 게시글 출력한다", response=List.class)
+	@GetMapping("getBoardLimitOffset/{offset}")
+	public ResponseEntity<List<BoardVO>> getBoardLimitOffset(@PathVariable int offset) throws Exception {
+		try {
+			List<BoardVO> boardList = boardService.getBoardLimitOffset(offset);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
 	
 	
 	

@@ -175,4 +175,20 @@ public class UserController {
 		
 	}
 	
+	@ApiOperation(value="회원을 검색한다", response=UserVO.class)
+	@GetMapping("findByUserId/{userId}")
+	public ResponseEntity<UserVO> findbyUserId(@PathVariable String userId) throws Exception {
+		try {
+			UserVO user = userService.findByUserId(userId);
+			if (user != null) return new ResponseEntity<UserVO>(user, HttpStatus.OK);
+			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<UserVO>(HttpStatus.NO_CONTENT);
+		}
+		
+	}
+	
+	
+	
 }
