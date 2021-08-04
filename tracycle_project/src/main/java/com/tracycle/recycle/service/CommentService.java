@@ -1,5 +1,6 @@
 package com.tracycle.recycle.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.tracycle.recycle.domain.CommentVO;
@@ -11,5 +12,7 @@ public interface CommentService {
 	boolean deleteComment(int commentId) throws Exception;
 	List<CommentVO> getAllComment(int boardId) throws Exception;
 	List<CommentVO> findCommentById(String userId) throws Exception;
-
+	
+	public List<CommentVO> getCommentLimitOffset(HashMap<String, Integer> map);
+	public int getCommentTotalCount(int boardId)throws Exception;
 }

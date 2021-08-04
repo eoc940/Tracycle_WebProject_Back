@@ -1,5 +1,6 @@
 package com.tracycle.recycle.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -37,6 +38,16 @@ public class CommentServiceImpl implements CommentService {
 	@Override
 	public List<CommentVO> findCommentById(String userId) throws Exception {
 		return commentDao.findCommentById(userId);
+	}
+
+	@Override
+	public int getCommentTotalCount(int boardId) throws Exception {
+		return commentDao.getCommentTotalCount(boardId);
+	}
+
+	@Override
+	public List<CommentVO> getCommentLimitOffset(HashMap<String, Integer> map) {
+		return commentDao.getCommentLimitOffset(map);
 	}
 
 }
