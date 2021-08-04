@@ -310,7 +310,7 @@ public class BoardController {
 	@ApiOperation(value="지역으로 게시물을 검색한다", response=List.class)
 	@GetMapping("findByArea/{areaId}")
 	public ResponseEntity<List<BoardVO>> findByArea(@PathVariable int areaId) throws Exception {
-		try {
+		try {						
 			List<BoardVO> boardList = boardService.findByArea(areaId);
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -322,8 +322,8 @@ public class BoardController {
 	@ApiOperation(value="품목으로 게시물을 검색한다", response=List.class)
 	@GetMapping("findByCategory/{categoryId}")
 	public ResponseEntity<List<BoardVO>> findByCategory(@PathVariable int categoryId) throws Exception {
-		try {
-			List<BoardVO> boardList = boardService.findByCategory(categoryId);
+		try {			
+			List<BoardVO> boardList = boardService.findByCategory(categoryId);			
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
 		}catch(RuntimeException e) {
 			e.printStackTrace();
