@@ -26,6 +26,11 @@ public class BoardServiceImpl implements BoardService {
 	public boolean updateBoard(BoardVO board) throws Exception {
 		return boardDao.updateBoard(board);
 	}
+	
+	@Override
+	public boolean updateBoardOnlyText(BoardVO board) throws Exception {
+		return boardDao.updateBoardOnlyText(board);
+	}
 
 	@Override
 	public boolean deleteBoard(int boardId) throws Exception {
@@ -106,6 +111,18 @@ public class BoardServiceImpl implements BoardService {
 	public FileVO getMainFile(String fileName) throws Exception {
 		return boardDao.getMainFile(fileName);
 	}
+
+	@Override
+	public List<BoardVO> getBoardLimitOffset(int offset) {
+		return boardDao.getBoardLimitOffset(offset);
+	}
+
+	@Override
+	public int getBoardTotalCount() {
+		return boardDao.getBoardTotalCount();
+	}
+
+	
 
 	
 

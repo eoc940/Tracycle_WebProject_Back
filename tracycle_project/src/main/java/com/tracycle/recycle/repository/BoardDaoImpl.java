@@ -31,6 +31,13 @@ public class BoardDaoImpl implements BoardDao {
 		if (updated > 0) return true;
 		return false;
 	}
+	
+	@Override
+	public boolean updateBoardOnlyText(BoardVO board) throws Exception {
+		int updated = sqlSession.update(ns + "updateBoardOnlyText", board);
+		if (updated > 0) return true;
+		return false;
+	}
 
 	@Override
 	public boolean deleteBoard(int boardId)  throws Exception{
@@ -113,6 +120,18 @@ public class BoardDaoImpl implements BoardDao {
 	public FileVO getMainFile(String fileName) throws Exception {
 		return sqlSession.selectOne(ns + "getMainFile", fileName);
 	}
+
+	@Override
+	public List<BoardVO> getBoardLimitOffset(int offset) {
+		return sqlSession.selectList(ns + "getBoardLimitOffset",offset);
+	}
+
+	@Override
+	public int getBoardTotalCount() {
+		return sqlSession.selectOne(ns + "getBoardTotalCount");
+	}
+
+	
 
 	
 
