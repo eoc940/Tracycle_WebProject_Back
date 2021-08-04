@@ -210,55 +210,7 @@ public class BoardController {
 		
 	}
 	
-	/*
-	 * 
-	 * String origMainFileName = mainFile.getOriginalFilename();
-			String mainFileName = new MD5Generator(origMainFileName).toString();
-			String savePath = System.getProperty("user.dir") + "\\files";
-			if(!new File(savePath).exists()) {
-				try {
-					new File(savePath).mkdir();
-				}catch(Exception e) {
-					e.printStackTrace();
-				}
-			}
-			String filePath = savePath + "\\" + mainFileName;
-			mainFile.transferTo(new File(filePath));
-			board.setPicture(origMainFileName);
-			boolean isUpdated = boardService.updateBoard(board);
-			System.out.println("updated 되었나? " + isUpdated);
-			boardService.deleteFiles(board.getBoardId());
-//			if (isUpdated) return new ResponseEntity<BoardVO>(HttpStatus.OK);
-//			return new ResponseEntity<BoardVO>(HttpStatus.NO_CONTENT);
-			FileVO mFile = new FileVO();
-			mFile.setBoard(board);
-			mFile.setFileName(mainFileName);
-			mFile.setFilePath(filePath);
-			mFile.setOriginalFileName(origMainFileName);
-			boardService.addFile(mFile);
-			for(MultipartFile file : files) {
-				String origFileName = file.getOriginalFilename();
-				String fileName = new MD5Generator(origFileName).toString();
-				String path = System.getProperty("user.dir") +"\\files";
-				if (!new File(path).exists()) {
-					try {
-						new File(path).mkdir();
-					}catch(Exception e) {
-						e.printStackTrace();
-					}
-				}
-				filePath = path + "\\" + fileName;
-				file.transferTo(new File(filePath));
-				//sFile subFile
-				FileVO sFile = new FileVO();
-				sFile.setBoard(board);
-				sFile.setOriginalFileName(origFileName);
-				sFile.setFileName(fileName);
-				sFile.setFilePath(filePath);
-				boardService.addFile(sFile);
-			}
-			return new ResponseEntity<BoardVO>(HttpStatus.OK);
-	 */
+	
 	 
 	@ApiOperation(value="게시글을 삭제한다", response=BoardVO.class)
 	@DeleteMapping("deleteBoard/{boardId}")
@@ -406,7 +358,9 @@ public class BoardController {
 	@ApiOperation(value="게시글 상세정보", response=BoardVO.class)
 	@GetMapping("getBoard/{boardId}")
 	public ResponseEntity<BoardVO> getBoard(@PathVariable int boardId) throws Exception {
+		
 		try {
+			
 			BoardVO board = boardService.getBoard(boardId);
 			return new ResponseEntity<BoardVO>(board, HttpStatus.OK);
 		}catch(RuntimeException e) {
