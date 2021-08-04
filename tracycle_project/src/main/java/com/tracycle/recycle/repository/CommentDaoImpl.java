@@ -1,5 +1,6 @@
 package com.tracycle.recycle.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -46,5 +47,17 @@ public class CommentDaoImpl implements CommentDao {
 	public List<CommentVO> findCommentById(String userId) throws Exception {
 		return sqlSession.selectList(ns + "findCommentById", userId);
 	}
+
+	@Override
+	public int getCommentTotalCount(int boardId) throws Exception {
+		return sqlSession.selectOne(ns + "getCommentTotalCount", boardId);
+	}
+
+	@Override
+	public List<CommentVO> getCommentLimitOffset(HashMap<String, Integer> map) {
+		return sqlSession.selectList(ns + "getCommentLimitOffset", map);
+	}
+
+	
 
 }

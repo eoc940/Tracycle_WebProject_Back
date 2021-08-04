@@ -1,5 +1,6 @@
 package com.tracycle.recycle.controller;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -15,6 +16,7 @@ import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import com.tracycle.recycle.domain.BoardVO;
 import com.tracycle.recycle.domain.CommentVO;
 import com.tracycle.recycle.service.CommentService;
 
@@ -92,5 +94,32 @@ public class CommentController {
 			return new ResponseEntity<List<CommentVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
-
+	
+	@ApiOperation(value="limit offset 에 해당하는 댓글 출력한다", response=List.class)
+	@GetMapping("getCommentLimitOffset/{boardId}/{offset}")
+	public ResponseEntity<List<CommentVO>> getBoardLimitOffset(@PathVariable int boardId, @PathVariable int offset) throws Exception {
+		try {
+			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+			map.put("boardId", boardId);
+			map.put("offset", offset);
+			List<CommentVO> commentList = commentService.getCommentLimitOffset(map);
+			return new ResponseEntity<List<CommentVO>>(commentList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<CommentVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="전체 댓글 수 출력", response=List.class)
+	@GetMapping("getCommentTotalCount/{boardId}")
+	public ResponseEntity<Integer>  getCommentTotalCount(@PathVariable int boardId) throws Exception {
+		try {
+			int totalCount= commentService.getCommentTotalCount(boardId);
+			return new ResponseEntity<Integer> (totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
 }
