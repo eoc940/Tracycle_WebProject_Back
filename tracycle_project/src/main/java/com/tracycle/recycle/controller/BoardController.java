@@ -63,14 +63,14 @@ public class BoardController {
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		
 		try {
-			System.out.println(board);
-			System.out.println(userId + areaId + categoryId);
+			//System.out.println(board);
+			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			System.out.println(board);
-			System.out.println(mainFile);
-			System.out.println(files);
+			//System.out.println(board);
+			//System.out.println(mainFile);
+			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -86,7 +86,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
-			System.out.println("!@#@!"+board);
+			//System.out.println("!@#@!"+board);
 			//mFile mainFile
 			FileVO mFile = new FileVO();
 			mFile.setBoard(board);
@@ -146,14 +146,14 @@ public class BoardController {
 			@RequestParam("mainFile") MultipartFile mainFile, 
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		try {
-			System.out.println(board);
-			System.out.println(userId + areaId + categoryId);
+			//System.out.println(board);
+			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			System.out.println(board);
-			System.out.println(mainFile);
-			System.out.println(files);
+			//System.out.println(board);
+			//System.out.println(mainFile);
+			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -169,7 +169,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.updateBoard(board);
-			System.out.println("!@#@!"+board);
+			//System.out.println("!@#@!"+board);
 			
 			boardService.deleteFiles(board.getBoardId());
 			
@@ -229,7 +229,7 @@ public class BoardController {
 	@GetMapping("getAllBoard")
 	public ResponseEntity<List<BoardVO>> getAllBoard(HttpServletRequest request) throws Exception {
 		try {
-			System.out.println("게시글리스트 인증 토큰 : " + request.getHeader("jwt-auth-token"));
+			//System.out.println("게시글리스트 인증 토큰 : " + request.getHeader("jwt-auth-token"));
 			List<BoardVO> boardList = boardService.getAllBoard();
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -245,7 +245,7 @@ public class BoardController {
 			FileVO file = boardService.getMainFile(picture);
 			InputStream imageStream = new FileInputStream(file.getFilePath());
 			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-			System.out.println(imageByteArray);
+			//System.out.println(imageByteArray);
 			imageStream.close();
 			return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 		}catch(RuntimeException e) {
