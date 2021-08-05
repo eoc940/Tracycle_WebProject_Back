@@ -7,6 +7,7 @@ import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
 import java.security.NoSuchAlgorithmException;
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
@@ -435,4 +436,33 @@ public class BoardController {
 		}
 	}
 	
+	@ApiOperation(value="limit offset 에 해당하는 카테고리 게시글을 출력한다", response=List.class)
+	@GetMapping("getCategoryLimitOffset/{categoryId}/{offset}")
+	public ResponseEntity<List<BoardVO>>getCategoryLimitOffset(@PathVariable int categoryId, @PathVariable int offset) throws Exception {
+		try {
+			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+			map.put("categoryId", categoryId);
+			map.put("offset", offset);
+			List<BoardVO> categoryList = boardService.getCategoryLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(categoryList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="limit offset 에 해당하는 카테고리 게시글을 출력한다", response=List.class)
+	@GetMapping("getAreaLimitOffset/{categoryId}/{offset}")
+	public ResponseEntity<List<BoardVO>>getAreaLimitOffset(@PathVariable int areaId, @PathVariable int offset) throws Exception {
+		try {
+			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+			map.put("areaId", areaId);
+			map.put("offset", offset);
+			List<BoardVO> areaList = boardService.getAreaLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(areaList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
 }

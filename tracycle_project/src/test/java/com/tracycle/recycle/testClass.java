@@ -196,7 +196,19 @@ public class testClass {
 		
 //		List<FileVO> list = session.selectList("BoardMapper.getFiles", 19);
 //		System.out.println(list);
-
+		
+		
+//		HashMap<String, Object> map  = new HashMap<String, Object>();
+//		map.put("categoryId", 2);
+//		map.put("offset", 0);
+//		List<BoardVO> list = session.selectList("BoardMapper.getCategoryLimitOffset", map);
+//		System.out.println(list);
+		
+//		HashMap<String, Integer> map  = new HashMap<String, Integer>();
+//		map.put("areaId", 1);
+//		map.put("offset", 0);
+//		List<BoardVO> list = session.selectList("BoardMapper.getAreaLimitOffset", map);
+//		System.out.println(list);
 
 //     ============================================================================
 		
