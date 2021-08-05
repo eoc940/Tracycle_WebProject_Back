@@ -1,5 +1,6 @@
 package com.tracycle.recycle.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.tracycle.recycle.domain.AreaVO;
@@ -32,4 +33,9 @@ public interface BoardDao {
 	//pagination
 	public List<BoardVO> getBoardLimitOffset(int offset);
 	public int getBoardTotalCount();
+	//추가
+	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer>map);
+	//public int getCategoryTotalCount(int categoryId)throws Exception;
+	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer>map);
+	//public int getAreaTotalCount(int AreaId)throws Exception;
 }
