@@ -158,20 +158,20 @@ public class BoardServiceImpl implements BoardService {
 		return boardDao.getCategoryLimitOffset(map);
 	}
 
-//	@Override
-//	public int getCategoryTotalCount(int categoryId) throws Exception {
-//		return boardDao.getCategoryTotalCount(categoryId);
-//	}
+	@Override
+	public int getCategoryTotalCount(int categoryId) throws Exception {
+		return boardDao.getCategoryTotalCount(categoryId);
+	}
 
 	@Override
 	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer> map) {
 		return boardDao.getAreaLimitOffset(map);
 	}
 
-//	@Override
-//	public int getAreaTotalCount(int AreaId) throws Exception {
-//		return boardDao.getAreaTotalCount(AreaId);
-//	}
+	@Override
+	public int getAreaTotalCount(int AreaId) throws Exception {
+		return boardDao.getAreaTotalCount(AreaId);
+	}
 
 
 	

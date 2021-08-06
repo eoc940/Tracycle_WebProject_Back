@@ -43,8 +43,8 @@ public interface BoardDao {
 
 	//추가
 	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer>map);
-	//public int getCategoryTotalCount(int categoryId)throws Exception;
+	public int getCategoryTotalCount(int categoryId)throws Exception;
 	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer>map);
-	//public int getAreaTotalCount(int AreaId)throws Exception;
+	public int getAreaTotalCount(int AreaId)throws Exception;
 
 }

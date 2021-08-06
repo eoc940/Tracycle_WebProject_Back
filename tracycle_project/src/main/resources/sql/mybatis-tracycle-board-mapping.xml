@@ -266,9 +266,16 @@
 	</select>	
 	
 
-	<select id="getCategoryTotalCount" resultType="int">
+	<select id="getCategoryTotalCount"  parameterType="int" resultType="int">
 		select count(*) from
-		category
+		board
+		WHERE category_id = #{value}
+	</select>
+	
+	<select id="getAreaTotalCount"  parameterType="int" resultType="int">
+		select count(*) from
+		board
+		WHERE area_id = #{value}
 	</select>
 	
 	<select id="getCategoryLimitOffset" parameterType="HashMap" resultMap="boardRM">
