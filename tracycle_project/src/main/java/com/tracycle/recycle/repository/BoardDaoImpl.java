@@ -133,24 +133,55 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
-	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer> map) {
-		return sqlSession.selectList(ns + "getgetCategoryLimitOffset", map);
+
+	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByTitleLimitOffset",map);
 	}
 
-//	@Override
-//	public int getCategoryTotalCount(int categoryId) throws Exception {
-//		return sqlSession.selectOne(ns + "getCategoryTotalCount", categoryId);
-//	}
+	@Override
+	public int findByTitleTotalCount(String title) {
+		return sqlSession.selectOne(ns + "findByTitleTotalCount",title);
+	}
+
+	@Override
+	public List<BoardVO> findByIdLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByIdLimitOffset",map);
+	}
+
+	@Override
+	public int findByIdTotalCount(String id) {
+		return sqlSession.selectOne(ns + "findByIdTotalCount",id);
+	}
+
+	@Override
+	public List<BoardVO> findByContentLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByContentLimitOffset",map);
+	}
+
+	@Override
+	public int findByContentTotalCount(String content) {
+		return sqlSession.selectOne(ns + "findByContentTotalCount",content);
+	}
+
+	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer> map) {
+		return sqlSession.selectList(ns + "getCategoryLimitOffset", map);
+	}
+
+	@Override
+	public int getCategoryTotalCount(int categoryId) throws Exception {
+		return sqlSession.selectOne(ns + "getCategoryTotalCount", categoryId);
+	}
 
 	@Override
 	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer> map) {
 		return sqlSession.selectList(ns + "getAreaLimitOffset", map);
 	}
 
-//	@Override
-//	public int getAreaTotalCount(int AreaId) throws Exception {
-//		return sqlSession.selectOne(ns + "getAreaTotalCount", AreaId);
-//	}
+	@Override
+	public int getAreaTotalCount(int AreaId) throws Exception {
+		return sqlSession.selectOne(ns + "getAreaTotalCount", AreaId);
+	}
+
 
 	
 

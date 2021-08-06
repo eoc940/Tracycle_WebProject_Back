@@ -435,9 +435,101 @@ public class BoardController {
 			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
+
+	@ApiOperation(value="제목으로 검색된 게시글 수 출력 ", response=List.class)
+	@GetMapping("findByTitleTotalCount/{title}")
+	public  ResponseEntity<Integer> findByTitleTotalCount(@PathVariable String title) throws Exception {
+		try {
+			int totalCount = boardService.findByTitleTotalCount(title);
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
 	
+	@ApiOperation(value="limit offset에 해당하는 제목으로 게시물을 검색한다", response=List.class)
+	@GetMapping("findByTitleLimitOffset/{title}/{offset}")
+	public ResponseEntity<List<BoardVO>> findByTitleLimitOffset(@PathVariable String title, @PathVariable String offset) throws Exception {
+		try {
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			map.put("title", title);
+			map.put("offset", offset);
+			List<BoardVO> boardList = boardService.findByTitleLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	@ApiOperation(value="아이디로 검색된 게시글 수 출력 ", response=List.class)
+	@GetMapping("findByIdTotalCount/{id}")
+	public  ResponseEntity<Integer> findByIdeTotalCount(@PathVariable String id) throws Exception {
+		try {
+			int totalCount = boardService.findByIdTotalCount(id);
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="limit offset에 해당하는 id로 게시물을 검색한다", response=List.class)
+	@GetMapping("findByIdLimitOffset/{id}/{offset}")
+	public ResponseEntity<List<BoardVO>> findByIdLimitOffset(@PathVariable String id, @PathVariable String offset) throws Exception {
+		try {
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			map.put("id", id);
+			map.put("offset", offset);
+			List<BoardVO> boardList = boardService.findByIdLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	@ApiOperation(value="내용으로 검색된 게시글 수 출력 ", response=List.class)
+	@GetMapping("findByContentTotalCount/{content}")
+	public  ResponseEntity<Integer> findByContentTotalCount(@PathVariable String content) throws Exception {
+		try {
+			int totalCount = boardService.findByContentTotalCount(content);
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="limit offset에 해당하는 내용으로 게시물을 검색한다", response=List.class)
+	@GetMapping("findByContentLimitOffset/{content}/{offset}")
+	public ResponseEntity<List<BoardVO>> findByContentLimitOffset(@PathVariable String content, @PathVariable String offset) throws Exception {
+		try {
+			HashMap<String, String> map = new HashMap<String, String>(); 
+			map.put("content", content);
+			map.put("offset", offset);
+			List<BoardVO> boardList = boardService.findByContentLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="카테고리로 검색된 게시글 수 출력 ", response=List.class)
+	@GetMapping("findByCategoryTotalCount/{categoryId}")
+	public  ResponseEntity<Integer> getCategoryTotalCount(@PathVariable int categoryId) throws Exception {
+		try {
+			int totalCount = boardService.getCategoryTotalCount(categoryId);
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
+
 	@ApiOperation(value="limit offset 에 해당하는 카테고리 게시글을 출력한다", response=List.class)
-	@GetMapping("getCategoryLimitOffset/{categoryId}/{offset}")
+	@GetMapping("findByCategoryLimitOffset/{categoryId}/{offset}")
 	public ResponseEntity<List<BoardVO>>getCategoryLimitOffset(@PathVariable int categoryId, @PathVariable int offset) throws Exception {
 		try {
 			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
@@ -451,8 +543,20 @@ public class BoardController {
 		}
 	}
 	
-	@ApiOperation(value="limit offset 에 해당하는 카테고리 게시글을 출력한다", response=List.class)
-	@GetMapping("getAreaLimitOffset/{categoryId}/{offset}")
+	@ApiOperation(value="지역으로 검색된 게시글 수 출력 ", response=List.class)
+	@GetMapping("findByAreaTotalCount/{areaId}")
+	public  ResponseEntity<Integer> getAreaTotalCount(@PathVariable int areaId) throws Exception {
+		try {
+			int totalCount = boardService.getAreaTotalCount(areaId);
+			return new ResponseEntity<Integer>(totalCount, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<Integer>(HttpStatus.NO_CONTENT);
+		}
+	}
+	
+	@ApiOperation(value="limit offset 에 해당하는 지역 게시글을 출력한다", response=List.class)
+	@GetMapping("findByAreaLimitOffset/{areaId}/{offset}")
 	public ResponseEntity<List<BoardVO>>getAreaLimitOffset(@PathVariable int areaId, @PathVariable int offset) throws Exception {
 		try {
 			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
