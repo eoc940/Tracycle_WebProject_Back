@@ -64,14 +64,14 @@ public class BoardController {
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		
 		try {
-			System.out.println(board);
-			System.out.println(userId + areaId + categoryId);
+			//System.out.println(board);
+			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			System.out.println(board);
-			System.out.println(mainFile);
-			System.out.println(files);
+			//System.out.println(board);
+			//System.out.println(mainFile);
+			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -87,7 +87,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
-			System.out.println("!@#@!"+board);
+			//System.out.println("!@#@!"+board);
 			//mFile mainFile
 			FileVO mFile = new FileVO();
 			mFile.setBoard(board);
@@ -147,14 +147,14 @@ public class BoardController {
 			@RequestParam("mainFile") MultipartFile mainFile, 
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		try {
-			System.out.println(board);
-			System.out.println(userId + areaId + categoryId);
+			//System.out.println(board);
+			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			System.out.println(board);
-			System.out.println(mainFile);
-			System.out.println(files);
+			//System.out.println(board);
+			//System.out.println(mainFile);
+			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -170,7 +170,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.updateBoard(board);
-			System.out.println("!@#@!"+board);
+			//System.out.println("!@#@!"+board);
 			
 			boardService.deleteFiles(board.getBoardId());
 			
@@ -230,7 +230,7 @@ public class BoardController {
 	@GetMapping("getAllBoard")
 	public ResponseEntity<List<BoardVO>> getAllBoard(HttpServletRequest request) throws Exception {
 		try {
-			System.out.println("게시글리스트 인증 토큰 : " + request.getHeader("jwt-auth-token"));
+			//System.out.println("게시글리스트 인증 토큰 : " + request.getHeader("jwt-auth-token"));
 			List<BoardVO> boardList = boardService.getAllBoard();
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -246,7 +246,7 @@ public class BoardController {
 			FileVO file = boardService.getMainFile(picture);
 			InputStream imageStream = new FileInputStream(file.getFilePath());
 			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-			System.out.println(imageByteArray);
+			//System.out.println(imageByteArray);
 			imageStream.close();
 			return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -435,8 +435,7 @@ public class BoardController {
 			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
-	
-	
+
 	@ApiOperation(value="제목으로 검색된 게시글 수 출력 ", response=List.class)
 	@GetMapping("findByTitleTotalCount/{title}")
 	public  ResponseEntity<Integer> findByTitleTotalCount(@PathVariable String title) throws Exception {
@@ -510,13 +509,41 @@ public class BoardController {
 			map.put("offset", offset);
 			List<BoardVO> boardList = boardService.findByContentLimitOffset(map);
 			return new ResponseEntity<List<BoardVO>>(boardList, HttpStatus.OK);
+
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
+
+
+	@ApiOperation(value="limit offset 에 해당하는 카테고리 게시글을 출력한다", response=List.class)
+	@GetMapping("getCategoryLimitOffset/{categoryId}/{offset}")
+	public ResponseEntity<List<BoardVO>>getCategoryLimitOffset(@PathVariable int categoryId, @PathVariable int offset) throws Exception {
+		try {
+			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+			map.put("categoryId", categoryId);
+			map.put("offset", offset);
+			List<BoardVO> categoryList = boardService.getCategoryLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(categoryList, HttpStatus.OK);
 		}catch(RuntimeException e) {
 			e.printStackTrace();
 			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
 	
-	
-	
-	
+	@ApiOperation(value="limit offset 에 해당하는 지역 게시글을 출력한다", response=List.class)
+	@GetMapping("getAreaLimitOffset/{categoryId}/{offset}")
+	public ResponseEntity<List<BoardVO>>getAreaLimitOffset(@PathVariable int areaId, @PathVariable int offset) throws Exception {
+		try {
+			HashMap<String, Integer> map = new HashMap<String, Integer>(); 
+			map.put("areaId", areaId);
+			map.put("offset", offset);
+			List<BoardVO> areaList = boardService.getAreaLimitOffset(map);
+			return new ResponseEntity<List<BoardVO>>(areaList, HttpStatus.OK);
+		}catch(RuntimeException e) {
+			e.printStackTrace();
+			return new ResponseEntity<List<BoardVO>>(HttpStatus.NO_CONTENT);
+		}
+	}
 }

@@ -124,6 +124,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
+<<<<<<< HEAD
 	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
 		return boardDao.findByTitleLimitOffset(map);
 	}
@@ -152,6 +153,26 @@ public class BoardServiceImpl implements BoardService {
 	public int findByContentTotalCount(String content) {
 		return boardDao.findByContentTotalCount(content);
 	}
+
+	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer> map) {
+		return boardDao.getCategoryLimitOffset(map);
+	}
+
+//	@Override
+//	public int getCategoryTotalCount(int categoryId) throws Exception {
+//		return boardDao.getCategoryTotalCount(categoryId);
+//	}
+
+	@Override
+	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer> map) {
+		return boardDao.getAreaLimitOffset(map);
+	}
+
+//	@Override
+//	public int getAreaTotalCount(int AreaId) throws Exception {
+//		return boardDao.getAreaTotalCount(AreaId);
+//	}
+
 
 	
 

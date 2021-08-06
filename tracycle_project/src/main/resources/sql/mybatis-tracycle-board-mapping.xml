@@ -188,13 +188,13 @@
 		ORDER BY board_id DESC limit 1
 	</select>
 	
-	<select id="getAllArea" parameterType="areaVO" resultMap="areaRM">
+	<select id="getAllArea" parameterType="int" resultMap="areaRM">
 		SELECT area_id, area_name, url, telephone 
 		FROM area
 	</select>
 	
 	
-	<select id="getAllCategory" parameterType="categoryVO" resultMap="categoryRM">
+	<select id="getAllCategory" parameterType="int" resultMap="categoryRM">
 		SELECT category_id, category_name
 		FROM category
 	</select>
@@ -265,5 +265,33 @@
 		WHERE content LIKE CONCAT('%',#{value},'%')
 	</select>	
 	
-		
+
+	<select id="getCategoryTotalCount" resultType="int">
+		select count(*) from
+		category
+	</select>
+	
+	<select id="getCategoryLimitOffset" parameterType="HashMap" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id
+		JOIN area a on
+		b.area_id = a.area_id
+		JOIN category c on b.category_id =
+		c.category_id
+		WHERE b.category_id = #{categoryId}
+		ORDER BY board_id DESC LIMIT 6 OFFSET #{offset}
+	</select>
+
+	
+	<select id="getAreaLimitOffset" parameterType="HashMap" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id
+		JOIN area a on
+		b.area_id = a.area_id
+		JOIN category c on b.category_id =
+		c.category_id
+		WHERE b.area_id = #{areaId}
+		ORDER BY board_id DESC LIMIT 6 OFFSET #{offset}
+	</select>
+	
 </mapper>

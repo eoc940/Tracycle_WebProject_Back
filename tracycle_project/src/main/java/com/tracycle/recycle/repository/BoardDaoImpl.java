@@ -133,6 +133,7 @@ public class BoardDaoImpl implements BoardDao {
 	}
 
 	@Override
+
 	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
 		return sqlSession.selectList(ns + "findByTitleLimitOffset",map);
 	}
@@ -161,6 +162,26 @@ public class BoardDaoImpl implements BoardDao {
 	public int findByContentTotalCount(String content) {
 		return sqlSession.selectOne(ns + "findByContentTotalCount",content);
 	}
+
+	public List<BoardVO> getCategoryLimitOffset(HashMap<String, Integer> map) {
+		return sqlSession.selectList(ns + "getgetCategoryLimitOffset", map);
+	}
+
+//	@Override
+//	public int getCategoryTotalCount(int categoryId) throws Exception {
+//		return sqlSession.selectOne(ns + "getCategoryTotalCount", categoryId);
+//	}
+
+	@Override
+	public List<BoardVO> getAreaLimitOffset(HashMap<String, Integer> map) {
+		return sqlSession.selectList(ns + "getAreaLimitOffset", map);
+	}
+
+//	@Override
+//	public int getAreaTotalCount(int AreaId) throws Exception {
+//		return sqlSession.selectOne(ns + "getAreaTotalCount", AreaId);
+//	}
+
 
 	
 
