@@ -124,7 +124,7 @@ public class BoardServiceImpl implements BoardService {
 	}
 
 	@Override
-<<<<<<< HEAD
+
 	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
 		return boardDao.findByTitleLimitOffset(map);
 	}
