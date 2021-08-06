@@ -1,5 +1,6 @@
 package com.tracycle.recycle.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import com.tracycle.recycle.domain.AreaVO;
@@ -32,4 +33,10 @@ public interface BoardService {
 	//pagination
 	public List<BoardVO> getBoardLimitOffset(int offset);
 	public int getBoardTotalCount();
+	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map);
+	public int findByTitleTotalCount(String title);
+	public List<BoardVO> findByIdLimitOffset(HashMap<String, String> map);
+	public int findByIdTotalCount(String id);
+	public List<BoardVO> findByContentLimitOffset(HashMap<String, String> map);
+	public int findByContentTotalCount(String content);
 }

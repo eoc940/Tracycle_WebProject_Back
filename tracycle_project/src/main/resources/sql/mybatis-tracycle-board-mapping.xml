@@ -61,7 +61,7 @@
 		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>
 	
 	<update id="updateBoard" parameterType="boardVO">
@@ -101,7 +101,7 @@
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
 		WHERE title LIKE CONCAT('%',#{value},'%')
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>
 	
 
@@ -111,7 +111,7 @@
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
 		WHERE b.user_id LIKE CONCAT('%',#{value},'%')
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>
 
 	<select id="findByContent" parameterType="string" resultMap="boardRM">
@@ -120,25 +120,25 @@
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
 		WHERE content LIKE CONCAT('%',#{value},'%')
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>		
 
-	<select id="findByArea" parameterType="boardVO" resultMap="boardRM">
+	<select id="findByArea" parameterType="int" resultMap="boardRM">
 		<include refid="select-board" />
 		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
 		WHERE b.area_id = #{value}
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>
 
-	<select id="findByCategory" parameterType="boardVO" resultMap="boardRM">
+	<select id="findByCategory" parameterType="int" resultMap="boardRM">
 		<include refid="select-board" />
 		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
 		JOIN area a on b.area_id = a.area_id
 		JOIN category c on b.category_id = c.category_id
 		WHERE b.category_id = #{value}
-		ORDER BY b.board_id DESC;
+		ORDER BY b.board_id DESC
 	</select>	
 	
 
@@ -204,8 +204,7 @@
 		board
 	</select>
 
-	<select id="getBoardLimitOffset" parameterType="int"
-		resultMap="boardRM">
+	<select id="getBoardLimitOffset" parameterType="int" resultMap="boardRM">
 		<include refid="select-board" />
 		FROM board b LEFT JOIN user u on b.user_id = u.user_id
 		JOIN area a on
@@ -214,5 +213,57 @@
 		c.category_id
 		ORDER BY b.board_id DESC LIMIT 6 OFFSET #{offset}
 	</select>
-				
+			
+	<select id="findByTitleLimitOffset" parameterType="HashMap" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE title LIKE CONCAT('%',#{title},'%')
+		ORDER BY b.board_id DESC LIMIT 6 OFFSET ${offset}
+	</select>
+	
+	<select id="findByTitleTotalCount" parameterType="string" resultType="int">
+		select count(*)
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE title LIKE CONCAT('%',#{value},'%') 
+	</select>
+
+	<select id="findByIdLimitOffset" parameterType="HashMap" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE b.user_id LIKE CONCAT('%',#{id},'%')
+		ORDER BY b.board_id DESC LIMIT 6 OFFSET ${offset}
+	</select>
+	
+	<select id="findByIdTotalCount" parameterType="string" resultType="int">
+		select count(*) 
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE b.user_id LIKE CONCAT('%',#{value},'%')
+	</select>
+
+	<select id="findByContentLimitOffset" parameterType="HashMap" resultMap="boardRM">
+		<include refid="select-board" />
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE content LIKE CONCAT('%',#{content},'%')
+		ORDER BY b.board_id DESC LIMIT 6 OFFSET ${offset}
+	</select>
+	
+	<select id="findByContentTotalCount" parameterType="string" resultType="int">
+		select count(*) 
+		FROM board b LEFT JOIN user u on b.user_id = u.user_id 
+		JOIN area a on b.area_id = a.area_id
+		JOIN category c on b.category_id = c.category_id
+		WHERE content LIKE CONCAT('%',#{value},'%')
+	</select>	
+	
+		
 </mapper>

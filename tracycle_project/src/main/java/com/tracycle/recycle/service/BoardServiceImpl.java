@@ -1,5 +1,6 @@
 package com.tracycle.recycle.service;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -120,6 +121,36 @@ public class BoardServiceImpl implements BoardService {
 	@Override
 	public int getBoardTotalCount() {
 		return boardDao.getBoardTotalCount();
+	}
+
+	@Override
+	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
+		return boardDao.findByTitleLimitOffset(map);
+	}
+
+	@Override
+	public int findByTitleTotalCount(String title) {
+		return boardDao.findByTitleTotalCount(title);
+	}
+
+	@Override
+	public List<BoardVO> findByIdLimitOffset(HashMap<String, String> map) {
+		return boardDao.findByIdLimitOffset(map);
+	}
+
+	@Override
+	public int findByIdTotalCount(String id) {
+		return boardDao.findByIdTotalCount(id);
+	}
+
+	@Override
+	public List<BoardVO> findByContentLimitOffset(HashMap<String, String> map) {
+		return boardDao.findByContentLimitOffset(map);
+	}
+
+	@Override
+	public int findByContentTotalCount(String content) {
+		return boardDao.findByContentTotalCount(content);
 	}
 
 	

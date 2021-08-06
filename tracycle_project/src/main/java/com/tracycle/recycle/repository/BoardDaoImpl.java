@@ -1,5 +1,6 @@
 package com.tracycle.recycle.repository;
 
+import java.util.HashMap;
 import java.util.List;
 
 import org.apache.ibatis.session.SqlSession;
@@ -129,6 +130,36 @@ public class BoardDaoImpl implements BoardDao {
 	@Override
 	public int getBoardTotalCount() {
 		return sqlSession.selectOne(ns + "getBoardTotalCount");
+	}
+
+	@Override
+	public List<BoardVO> findByTitleLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByTitleLimitOffset",map);
+	}
+
+	@Override
+	public int findByTitleTotalCount(String title) {
+		return sqlSession.selectOne(ns + "findByTitleTotalCount",title);
+	}
+
+	@Override
+	public List<BoardVO> findByIdLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByIdLimitOffset",map);
+	}
+
+	@Override
+	public int findByIdTotalCount(String id) {
+		return sqlSession.selectOne(ns + "findByIdTotalCount",id);
+	}
+
+	@Override
+	public List<BoardVO> findByContentLimitOffset(HashMap<String, String> map) {
+		return sqlSession.selectList(ns + "findByContentLimitOffset",map);
+	}
+
+	@Override
+	public int findByContentTotalCount(String content) {
+		return sqlSession.selectOne(ns + "findByContentTotalCount",content);
 	}
 
 	
