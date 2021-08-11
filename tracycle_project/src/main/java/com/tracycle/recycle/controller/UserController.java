@@ -1,8 +1,10 @@
 package com.tracycle.recycle.controller;
 
 import java.util.HashMap;
+
 import java.util.List;
 import java.util.Map;
+import java.util.logging.Logger;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -29,6 +31,7 @@ import com.tracycle.recycle.util.JwtService;
 
 import io.swagger.annotations.Api;
 import io.swagger.annotations.ApiOperation;
+import lombok.extern.java.Log;
 import lombok.extern.slf4j.Slf4j;
 
 
@@ -77,6 +80,7 @@ public class UserController {
 			resultMap.put("status", true);
 			resultMap.put("data", loginUser);
 			status = HttpStatus.ACCEPTED;
+			
 		} catch(RuntimeException e) {
 			log.error("로그인 실패", e);
 			resultMap.put("message", e.getMessage());
