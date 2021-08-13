@@ -40,7 +40,7 @@
 	<sql id="select-comment">
 	SELECT 
 	c.comment_id comment_id, c.date date, c.content content, c.secret secret, 
-	c.user_id user_id, c.board_id board_id, b.title title
+	c.user_id user_id, c.board_id board_id
 	</sql>
 	
 	<insert id="writeComment" parameterType="commentVO">
@@ -78,6 +78,7 @@
 	
 	<select id="findCommentById" parameterType="string" resultMap="commentRM">
 		<include refid="select-comment" />
+		, b.title title 
 		FROM comment c INNER JOIN user u on c.user_id = u.user_id
 		JOIN board b on c.board_id = b.board_id
 		WHERE c.user_id = #{value}
