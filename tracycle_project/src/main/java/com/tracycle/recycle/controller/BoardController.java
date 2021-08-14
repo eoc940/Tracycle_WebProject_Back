@@ -64,14 +64,9 @@ public class BoardController {
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		
 		try {
-			//System.out.println(board);
-			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			//System.out.println(board);
-			//System.out.println(mainFile);
-			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -87,7 +82,7 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.writeBoard(board);
-			//System.out.println("!@#@!"+board);
+			
 			//mFile mainFile
 			FileVO mFile = new FileVO();
 			mFile.setBoard(board);
@@ -109,6 +104,7 @@ public class BoardController {
 				}
 				filePath = path + "/" + fileName;
 				file.transferTo(new File(filePath));
+				
 				//sFile subFile
 				FileVO sFile = new FileVO();
 				sFile.setBoard(board);
@@ -147,14 +143,9 @@ public class BoardController {
 			@RequestParam("mainFile") MultipartFile mainFile, 
 			@RequestParam("file") List<MultipartFile> files ) throws Exception{
 		try {
-			//System.out.println(board);
-			//System.out.println(userId + areaId + categoryId);
 			board.setUser(new UserVO(userId));
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
-			//System.out.println(board);
-			//System.out.println(mainFile);
-			//System.out.println(files);
 			
 			String origMainFileName = mainFile.getOriginalFilename();
 			String mainFileName = new MD5Generator(origMainFileName).toString();
@@ -170,8 +161,6 @@ public class BoardController {
 			mainFile.transferTo(new File(filePath));
 			board.setPicture(mainFileName);
 			boardService.updateBoard(board);
-			//System.out.println("!@#@!"+board);
-			
 			boardService.deleteFiles(board.getBoardId());
 			
 			//mFile mainFile
@@ -195,6 +184,7 @@ public class BoardController {
 				}
 				filePath = path + "\\" + fileName;
 				file.transferTo(new File(filePath));
+				
 				//sFile subFile
 				FileVO sFile = new FileVO();
 				sFile.setBoard(board);
@@ -211,8 +201,6 @@ public class BoardController {
 		
 	}
 	
-
-	 
 	@ApiOperation(value="게시글을 삭제한다", response=BoardVO.class)
 	@DeleteMapping("deleteBoard/{boardId}")
 	public ResponseEntity<BoardVO> deleteBoard(@PathVariable int boardId) throws Exception {
@@ -246,7 +234,6 @@ public class BoardController {
 			FileVO file = boardService.getMainFile(picture);
 			InputStream imageStream = new FileInputStream(file.getFilePath());
 			byte[] imageByteArray = IOUtils.toByteArray(imageStream);
-			//System.out.println(imageByteArray);
 			imageStream.close();
 			return new ResponseEntity<byte[]>(imageByteArray, HttpStatus.OK);
 		}catch(RuntimeException e) {
@@ -385,8 +372,6 @@ public class BoardController {
 			return new ResponseEntity<List<CommentVO>>(HttpStatus.NO_CONTENT);
 		}
 	}
-	
-	
 	
 	@ApiOperation(value="전체 지역 출력", response=List.class)
 	@GetMapping("getAllArea")

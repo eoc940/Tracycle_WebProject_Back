@@ -29,11 +29,11 @@ package com.tracycle.recycle;
 
 		private ApiInfo apiInfo() {
 			return new ApiInfoBuilder().title("Encore API")
-				.description("Encore API Reference for Data Scientists Developers")
+				.description("Tracycle Final Project")
 				.termsOfServiceUrl("https://playdata.io")
 				.contact(
-					new Contact("Ha Seung Hyun", "https://playdata.io",
-					"sueup@daum.net"))
+					new Contact("Kim Hyung Geun", "https://playdata.io",
+					"workdevkim@gmail.com"))
 				.license("Encore License 0.9")
 				.licenseUrl("https://www.en-core.com/consult/consult1")
 				.version("0.9")

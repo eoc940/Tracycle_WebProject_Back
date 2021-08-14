@@ -1,4 +1,4 @@
-package com.tracycle.recycle.controller;
+package com.tracycle.recycle.util;
 
 import java.util.HashMap;
 import java.util.Map;

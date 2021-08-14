@@ -48,9 +48,7 @@ public class CommentController {
 	@PutMapping("updateComment")
 	public ResponseEntity<CommentVO> updateComment(@RequestBody CommentVO comment) throws Exception {
 		try {
-			System.out.println(comment + " 입력값입니다");
 			boolean isUpdated = commentService.updateComment(comment);
-			System.out.println(isUpdated + "????");
 			if (isUpdated) return new ResponseEntity<CommentVO>(HttpStatus.OK);
 			return new ResponseEntity<CommentVO>(HttpStatus.NO_CONTENT);
 		}catch(RuntimeException e) {
