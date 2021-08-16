@@ -95,6 +95,6 @@
 	    <include refid="select-comment" />
 		FROM comment c
 		WHERE c.board_id = #{boardId}
-		ORDER BY c.comment_id DESC LIMIT 10 OFFSET #{offset};
+		ORDER BY c.comment_id LIMIT 10 OFFSET #{offset};
 	</select>
 </mapper>
