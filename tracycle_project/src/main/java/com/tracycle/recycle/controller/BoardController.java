@@ -68,7 +68,7 @@ public class BoardController {
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
 			
-			String origMainFileName = mainFile.getOriginalFilename();
+			String origMainFileName = mainFile.getOriginalFilename() + String.valueOf(Math.random());
 			String mainFileName = new MD5Generator(origMainFileName).toString();
 			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
@@ -92,7 +92,7 @@ public class BoardController {
 			boardService.addFile(mFile);
 			
 			for(MultipartFile file : files) {
-				String origFileName = file.getOriginalFilename();
+				String origFileName = file.getOriginalFilename() + String.valueOf(Math.random());
 				String fileName = new MD5Generator(origFileName).toString();
 				String path = System.getProperty("user.dir") +"/files";
 				if (!new File(path).exists()) {
@@ -147,7 +147,7 @@ public class BoardController {
 			board.setArea(new AreaVO(areaId));
 			board.setCategory(new CategoryVO(categoryId));
 			
-			String origMainFileName = mainFile.getOriginalFilename();
+			String origMainFileName = mainFile.getOriginalFilename() + String.valueOf(Math.random());
 			String mainFileName = new MD5Generator(origMainFileName).toString();
 			String savePath = System.getProperty("user.dir") + "/files";
 			if(!new File(savePath).exists()) {
@@ -172,7 +172,7 @@ public class BoardController {
 			boardService.addFile(mFile);
 			
 			for(MultipartFile file : files) {
-				String origFileName = file.getOriginalFilename();
+				String origFileName = file.getOriginalFilename() + String.valueOf(Math.random());
 				String fileName = new MD5Generator(origFileName).toString();
 				String path = System.getProperty("user.dir") +"\\files";
 				if (!new File(path).exists()) {
