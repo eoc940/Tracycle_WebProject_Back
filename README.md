@@ -73,18 +73,25 @@
 - 기능 추가
   - 비밀번호 암호화 구현
   - Spring Security + Redis를 이용한 refresh token
+  - 배포 자동화
 - 기술 적용
   - Spring Security
   - Redis
   - MSA Architecture
   - Nginx
+  - Jenkins
 
 <br>
   
-### :family: Contributer
+### :family: Contributors
 --- 
-
-
+- [Cloud0720](https://github.com/Cloud0720)
+- [EunchongJeong](https://github.com/EunchongJeong)
+- [iceman-brandon](https://github.com/iceman-brandon)
+- [Koartifact](https://github.com/Koartifact)
+- [SS0mmy](https://github.com/SS0mmy)
+- [Suziny91](https://github.com/Suziny91)
+- [sxxzin](https://github.com/sxxzin)
 
 
 
